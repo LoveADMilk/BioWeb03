@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>上传成功</title>
+</head>
+<body>
+<table>
+    <tr th:each="map : ${resultMap}">
+        <td th:text="${map.key} + | --- | + ${map.value}"></td>
+    </tr>
+</table>
+
+</div>
+</body>
+</html>
