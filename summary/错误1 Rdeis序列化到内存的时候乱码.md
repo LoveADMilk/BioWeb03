@@ -5,7 +5,7 @@
 于是到Redis中寻找keys *;
 
 发现所有的key 全是乱码状态
-![img](https://github.com/LoveADMilk/BioWeb03/raw/master/summary/image/mistake1.PNG "img1")
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/mistake1.PNG?raw=true "img1")
 
 于是 判断 Redis中的序列化设置出现了问题
 
