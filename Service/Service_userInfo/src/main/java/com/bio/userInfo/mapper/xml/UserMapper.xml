@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bio.userInfo.mapper.UserMapper">
+    <select id="findall" parameterType="int" resultType ="com.bio.entityModel.model.user.userInfo">
+        select * from userInfo
+        where id = #{id}
+    </select>
+<!--    存入注册的用户-->
+    <insert id="insertUserInfo" parameterType="com.bio.entityModel.model.user.userInfo">
+        insert into userInfo ( nickName, password,email,activeStatus,activeCode)
+        values (#{nickName}, #{password}, #{email},#{activeStatus},#{activeCode})
+    </insert>
+
+<!--    <select id="selectUserByActiveCode" parameterType="String" resultType="com.laoxu.java.mailtest.entity.User">-->
+<!--        select * from user where active_code = #{activeCode}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;激活账户，修改用户状态&ndash;&gt;-->
+<!--    <update id="update" parameterType="com.laoxu.java.mailtest.entity.User">-->
+<!--        update user-->
+<!--        set active_status=#{activeStatus},username=#{username},password=#{password},-->
+<!--            email=#{email}, active_status=#{activeStatus},active_code=#{activeCode}-->
+<!--        where id=#{id}-->
+<!--    </update>-->
+
+<!--    &lt;!&ndash;登录,根据 activeStatus=1 进行查询&ndash;&gt;-->
+<!--    <select id="select" resultType="com.laoxu.java.mailtest.entity.User">-->
+<!--        select * from user where username=#{username} and password=#{password} and active_status=1-->
+<!--    </select>-->
+
+</mapper>

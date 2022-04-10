@@ -45,4 +45,34 @@ https://github.com/LoveADMilk/BioWeb-Flask
 
 没做出来
 
+## 2 登录功能
 
+使用邮箱注册，并返回验证
+
+验证功能
+
+1 先再QQ邮箱开启POP3和SMTP服务
+
+2 核心逻辑代码
+
+```java
+@GetMapping("/postMali")
+public String senMail(){
+    SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+    simpleMailMessage.setSubject("你好");
+    simpleMailMessage.setText("这是一封测试文件");
+    simpleMailMessage.setTo("yj7558921@163.com");//目标网址
+    simpleMailMessage.setFrom("742854584@qq.com");//
+    System.out.println("发送了邮件");
+
+    javaMailSender.send(simpleMailMessage);//发送邮件
+    System.out.println("---------");
+    return "OK";
+
+```
+
+
+
+注意点1-由于使用的是主键自增策略，所以在实体类的id中加入注解@TableId(value = “id”,type = IdType.AUTO)//主键生成策略
+
+注意点2-MySQL表中的字段尽量用驼峰命名，如果采用下划线命名可能会导致出现，返回值为null的情况，其原因在于Mybatis无法识别

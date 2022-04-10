@@ -11,6 +11,9 @@
     <modules>
         <module>VisitPython</module>
         <module>common</module>
+        <module>model</module>
+        <module>Service</module>
+        <module>Service_user</module>
     </modules>
 
     <parent>
