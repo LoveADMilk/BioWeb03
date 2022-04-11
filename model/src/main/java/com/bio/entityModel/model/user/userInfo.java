@@ -8,12 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 //必须驼峰命名，否则mybatis的ResultType无法识别下滑线
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("userInfo")
-public class userInfo {
+public class userInfo implements Serializable {
 
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;

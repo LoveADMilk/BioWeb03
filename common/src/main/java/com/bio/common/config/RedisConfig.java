@@ -49,27 +49,6 @@ public class RedisConfig {
             }
         };
     }
-    //防止加入key时出现乱码
-//    @Bean
-//    public RedisTemplate redisTemplateInit() {
-//        //设置序列化Key的实例化对象
-//        redisTemplate.setKeySerializer(new StringRedisSerializer());
-//        //设置序列化Value的实例化对象
-//        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-//        return redisTemplate;
-//    }
-
-//    @Bean
-//    public RedisTemplate redisTemplate(RedisConnectionFactory factory){
-//        RedisTemplate redisTemplate = new RedisTemplate();
-//        RedisSerializer stringSerializer = new StringRedisSerializer();
-//        redisTemplate.setConnectionFactory(factory);
-//        redisTemplate.setKeySerializer(stringSerializer);
-//        redisTemplate.setValueSerializer(stringSerializer);
-//        redisTemplate.setHashKeySerializer(stringSerializer);
-//        redisTemplate.setHashValueSerializer(stringSerializer);
-//        return redisTemplate;
-//    }
     /**
      * 设置RedisTemplate规则
      * @param

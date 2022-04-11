@@ -46,10 +46,9 @@ https://github.com/LoveADMilk/BioWeb-Flask
 没做出来
 
 ## 2 登录功能
+使用邮箱注册，并返回验证链接，用户点击链接之后才能实现注册成功，点击链接之前，用户对象信息存入redis中，并设置过期时间
 
-使用邮箱注册，并返回验证
-
-验证功能
+验证功能：
 
 1 先再QQ邮箱开启POP3和SMTP服务
 
@@ -71,8 +70,24 @@ public String senMail(){
 
 ```
 
+3 延时注入数据库，先将用户信息存入到Redis中，并设置过期时间，过期时间内点击验证链接，方可完成注册存入数据库之中
+
+```java
+redisTemplate.opsForValue().set(activeCode, user, 60*10, TimeUnit.SECONDS);//设这10分钟的过期时间
+```
+
+```java
+redisTemplate.hasKey(code)//判断是否存在
+```
+
 
 
 注意点1-由于使用的是主键自增策略，所以在实体类的id中加入注解@TableId(value = “id”,type = IdType.AUTO)//主键生成策略
 
 注意点2-MySQL表中的字段尽量用驼峰命名，如果采用下划线命名可能会导致出现，返回值为null的情况，其原因在于Mybatis无法识别
+
+注意点3-序列化implements Serializable，当我们想把实体类对象序列化到redis中的时候需要对实体类添加implements Serializable，允许其可以序列化
+
+​		否则会报错`DefaultSerializer requires a Serializable payload but received an object of type`
+
+注意点4-想要获取RedisTemplate< String, Object>的Bean，要根据名字装配。也就是使用@Resource
