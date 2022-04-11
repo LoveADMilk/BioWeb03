@@ -28,12 +28,13 @@ public interface UserMapper extends BaseMapper<userInfo> {
 
     void updateUserInfo(userInfo user);
 
+
+
     /**
-     *  查询用户
-     * @param user
+     *  根据mail查询用户是否存在
+     * @param email
      * @return
      */
-    userInfo selectUserInfo(userInfo user);
-
+    Integer selectUserIdByMail(String email);
 
 }

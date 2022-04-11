@@ -23,4 +23,9 @@ public class UserServiceImpl implements UserService {
         log.info("用户信息注入数据库成功");
     }
 
+    @Override
+    public Integer selectUserIdByMail(String email) {
+        return userMapper.selectUserIdByMail(email);
+    }
+
 }

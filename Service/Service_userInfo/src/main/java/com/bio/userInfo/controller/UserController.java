@@ -32,12 +32,24 @@ public class UserController {
         return "index";
     }
 
-//  登录板块
+    /**
+     * 用户注册
+     * **/
     @RequestMapping("/register")
     public String register(userInfo user){
         user.setActiveStatus(0);//状态
         String activeCode = IDUtils.getUUID();//生成随机激活码
         user.setActiveCode(activeCode);
+        /**
+         * 这里加入判断是否出现邮箱和名字重复的功能
+         * */
+        Integer userId = userService.selectUserIdByMail(user.getEmail());
+        //如果是空的话就是Null也就是数据库中无重复
+        if(userId != null){
+            log.info("当前的邮箱重复");
+            return "index";
+        }
+        log.info("用户ID为："+ userId);
         //先存入Redis中 key为activeCode ， value：为对象
         redisTemplate.opsForValue().set(activeCode, user, 60*10, TimeUnit.SECONDS);//设这10分钟的过期时间
         //发送邮件
@@ -66,5 +78,13 @@ public class UserController {
         }
         //验证成功后返回登录界面
         return "login";
+    }
+    /**
+     * 登录功能
+     * @param user 传入的登录用户对象
+     * **/
+    public String login(userInfo user){
+
+        return "";
     }
 }

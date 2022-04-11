@@ -10,4 +10,6 @@ public interface UserService {
 //    void add(userInfo user);
 
     void insertUser(userInfo user);
+
+    Integer selectUserIdByMail(String email);
 }

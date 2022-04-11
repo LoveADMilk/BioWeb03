@@ -12,6 +12,10 @@
         values (#{nickName}, #{password}, #{email},#{activeStatus},#{activeCode})
     </insert>
 
+    <select id="selectUserIdByMail" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select id from userInfo
+        where email = #{email}
+    </select>
 <!--    <select id="selectUserByActiveCode" parameterType="String" resultType="com.laoxu.java.mailtest.entity.User">-->
 <!--        select * from user where active_code = #{activeCode}-->
 <!--    </select>-->
