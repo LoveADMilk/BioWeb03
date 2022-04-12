@@ -12,4 +12,6 @@ public interface UserService {
     void insertUser(userInfo user);
 
     Integer selectUserIdByMail(String email);
+
+    userInfo selectUserByEmail(String email);
 }

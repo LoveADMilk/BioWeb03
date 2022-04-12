@@ -37,4 +37,5 @@ public interface UserMapper extends BaseMapper<userInfo> {
      */
     Integer selectUserIdByMail(String email);
 
+    userInfo selectUserByMail(String email);
 }

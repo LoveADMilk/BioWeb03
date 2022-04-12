@@ -79,12 +79,26 @@ public class UserController {
         //验证成功后返回登录界面
         return "login";
     }
+
+    //直接访问到登录界面
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
     /**
      * 登录功能
-     * @param user 传入的登录用户对象
+     * @param  email, password 传入的登录用户的邮箱与密码
      * **/
-    public String login(userInfo user){
-
-        return "";
+    //点击登录按钮之后
+    @RequestMapping("/userLogin")
+    public String userLogin(String email, String password){
+        //返回用户对象根据邮箱
+        userInfo user = userService.selectUserByEmail(email);
+        if(user == null || !user.getPassword().equals(password)){
+            log.info("用户密码或邮箱错误请重新登录");
+        }
+        log.info(user.getEmail() + "该用户登陆成功");
+        //登录成功返回到login
+        return "login";
     }
 }
