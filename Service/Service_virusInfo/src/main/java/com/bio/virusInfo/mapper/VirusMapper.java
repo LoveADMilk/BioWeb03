@@ -8,4 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface VirusMapper extends BaseMapper<Virus> {
 
     Virus searchAll(int i);
+
+    void updateTimeById(Virus virus);
+
+    void insertVirus(Virus virus);
 }

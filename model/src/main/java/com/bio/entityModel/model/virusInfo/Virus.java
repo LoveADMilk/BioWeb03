@@ -37,7 +37,7 @@ public class Virus {
     private BigDecimal latitude;
 
     @TableField("time")
-    private Date time;
+    private String time;
 
     //    季节0、1、2、3春夏秋冬
     @TableField("season")

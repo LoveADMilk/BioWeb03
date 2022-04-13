@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>病毒信息上传模板</title>
+    <meta name="author" content="LOVE_AD_MILK">
+    <style>
+        table{
+            border-top: 1px solid #000000;
+            border-left: 1px solid #000000;
+            border-collapse: collapse; /*设置单元格的边框合并为1*/
+        }
+        th{
+            text-align: right;
+        }
+        th, td{
+            border-bottom: 1px solid #000000;
+            border-right: 1px solid #000000;
+            padding: 5px 10px;
+        }
+        select{
+            width: 100px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+<form action="/virusUpload" method="post" name="myForm">
+    <table align="center">
+        <caption>病毒信息表基本模板</caption>
+        <tr>
+            <th>病毒名字：</th>
+<!--            这里的name要与实体类定义的名字相同，否则无法识别-->
+<!--            text是单行文本-->
+            <td><input type="text" id="virusName" name="name"/></td>
+        </tr>
+        <tr>
+            <th>所在城市：</th>
+            <td><input type="text" id="address" name="address"/></td>
+        </tr>
+        <tr>
+            <th>所处季节：</th>
+            <td>
+                <input id="spring" name="season" type="radio" value="0"/>
+                <label for="spring">春季</label>
+                <input id="summer" name="season" type="radio" value="1"/>
+                <label for="summer">夏季</label>
+                <input id="autumn" name="season" type="radio" value="2"/>
+                <label for="autumn">秋季</label>
+                <input id="winter" name="season" type="radio" value="3"/>
+                <label for="winter">冬季</label>
+            </td>
+        </tr>
+        <tr>
+            <th>抗原序列：</th>
+            <td><textarea name="sequence" rows="20" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <th>具体时间：</th>
+            <td><input type="date" id="time" name="time"/></td>
+        </tr>
+        <tr>
+            <th>备注信息：</th>
+            <td><textarea name="tip" rows="5" cols="50"></textarea></td>
+        </tr>
+
+        <tr>
+            <th>病毒类型：</th>
+            <td>
+                <select name="type" class="b_select" >
+                    <option value="">请选择</option>
+<!--                    这里可以后期从数据库扩展得到所有类型-->
+<!--                    <option th:each="item:${departmentList}"-->
+<!--                            th:value="${item.value}" th:text="${item.text}"-->
+<!--                            th:selected="${userInfo.departmentCode==item.value}">-->
+<!--                    </option>-->
+                    <option value="H1N1">H1N1</option>
+                    <option value="H3N2">H3N2</option>
+                    <option value="H5N1">H5N1</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>序列类别：</th>
+            <td><input type="text" id="sequenceType" name="sequenceType" placeholder="HA1/HA2/PB..."/></td>
+        </tr>
+        <tr>
+            <th>数据来源：</th>
+            <td>
+                <select name="dataFrom" class="b_select" >
+                    <option value="">请选择</option>
+                    <option value="journal">期刊文献</option>
+                    <option value="WHO">WHO报告</option>
+                    <option value="laboratory">数据库</option>
+                    <option value="H5N1">实验室测序</option>
+                    <option value="other">其它</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <th>扩展位置</th>
+            <td>扩展位置</td>
+        </tr>
+        <!-- 以下是提交、取消按钮 -->
+        <tr>
+            <td colspan="2" style="text-align: center; padding: 5px;">
+                <input class="b_button" type="submit" value="提交" />
+                <input class="b_button" type="reset" value="重置" />
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

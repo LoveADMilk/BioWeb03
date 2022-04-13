@@ -7,4 +7,15 @@
         where id = #{id}
     </select>
 
+    <update id="updateTimeById" parameterType="com.bio.entityModel.model.virusInfo.Virus">
+        update virus set
+        time = #{time}
+        where id = 1;
+    </update>
+
+    <insert id="insertVirus" parameterType="com.bio.entityModel.model.virusInfo.Virus">
+        insert into virus(userId, name, address, longitude, latitude, time, season, type, sequence, sequenceType, dataFrom, tip)
+        values (#{userId}, #{name}, #{address}, #{longitude},
+                #{latitude}, #{time}, #{season}, #{type},#{sequence},#{sequenceType},#{dataFrom},#{tip})
+    </insert>
 </mapper>
