@@ -11,6 +11,7 @@
         <module name="model" />
         <module name="common" />
         <module name="VisitPython" />
+        <module name="Service_virusInfo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -23,6 +24,7 @@
       <module name="Service" options="-parameters" />
       <module name="Service_user" options="-parameters" />
       <module name="Service_userInfo" options="-parameters" />
+      <module name="Service_virusInfo" options="-parameters" />
       <module name="VisitPython" options="-parameters" />
       <module name="common" options="-parameters" />
       <module name="model" options="-parameters" />

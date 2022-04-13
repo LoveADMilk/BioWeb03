@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>Service_userInfo</module>
+        <module>Service_virusInfo</module>
     </modules>
 
     <properties>
