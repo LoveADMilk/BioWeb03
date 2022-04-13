@@ -99,9 +99,42 @@ redisTemplate.hasKey(code)//判断是否存在
 
 （1）流感数据基本信息表
 
-| 流感ID | 流感名           | 地点   | 城市经纬度 | 时间     | 季节       | create时间 | 修改时间 | 具体类型         | 流感类型       | 序列（text)                                                  | 备注 | 上传用户ID | 数据来源           | 序列类型           |
-| ------ | ---------------- | ------ | ---------- | -------- | ---------- | ---------- | -------- | ---------------- | -------------- | ------------------------------------------------------------ | ---- | ---------- | ------------------ | ------------------ |
-| 1      | A/BAYERN/69/2009 | BAYERN | ***        | 2009-1-1 | 0、1、2、3 | 时间戳     | 时间戳   | H1N1、H3N2、H5N1 | 甲、乙类、丙类 | mdvnptllfl kvpaqnaist tfpytgdppy shgtgtgytm dtvnrthqys ergrwtknte | ***  | 1          | 实验室名字、期刊等 | HA、 PB1、完整序列 |
+| 流感ID | 流感名           | 地点   | 城市经纬度 | 时间     | 季节       | create时间 | 修改时间 | 流感类型         | 序列（text)                                                  | 备注 | 上传用户ID | 数据来源           | 序列类型           |
+| ------ | ---------------- | ------ | ---------- | -------- | ---------- | ---------- | -------- | ---------------- | ------------------------------------------------------------ | ---- | ---------- | ------------------ | ------------------ |
+| 1      | A/BAYERN/69/2009 | BAYERN | ***        | 2009-1-1 | 0、1、2、3 | 时间戳     | 时间戳   | H1N1、H3N2、H5N1 | mdvnptllfl kvpaqnaist tfpytgdppy shgtgtgytm dtvnrthqys ergrwtknte | ***  | 1          | 实验室名字、期刊等 | HA、 PB1、完整序列 |
+
+```sql
+CREATE TABLE `virus` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `userId` BIGINT(20) NOT NULL COMMENT '用户编号',
+  `name` VARCHAR(100) NOT NULL COMMENT '流感名称',
+  `address` VARCHAR(100) DEFAULT NULL COMMENT '所在城市',
+  `longitude` DECIMAL(9,6) DEFAULT NULL COMMENT '经度',
+  `latitude` DECIMAL(9,6) DEFAULT NULL COMMENT '纬度',
+  `time` DATE DEFAULT NULL COMMENT '定义时间',
+  `season` TINYINT DEFAULT NULL COMMENT '季节0、1、2、3春夏秋冬',
+  `type` VARCHAR(100) DEFAULT NULL COMMENT '流感类型(H1N1\H3N1\H5N1...)',
+  `sequence` TEXT DEFAULT NULL COMMENT '流感序列内容',
+  `sequenceType` VARCHAR(100) DEFAULT NULL COMMENT '流感序列类型(HA\HB\HA1\HA2\null...)',
+  `dataFrom` VARCHAR(100) DEFAULT NULL COMMENT '数据来源',
+  `tip` TEXT DEFAULT NULL COMMENT '备注内容',
+  `createTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updateTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='流感数据表';
+```
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-1.PNG?raw=true)
+经纬度选择上使用
+
+1.
+longitudes（经度）: decimal(9,6)
+2. latitudes （纬度）: decimal(8,6)
+
+经度取值范围为`[0,180]`，纬度的取值范围为`[0,90]`
+
+float,double容易产生误差，对精确度要求比较高时，建议使用decimal来存，decimal在mysql内存是以字符串存储的
+
+城市经纬度表（考虑）查询城市的经纬度
 
 （2）患者个体信息表
 
@@ -130,6 +163,14 @@ redisTemplate.hasKey(code)//判断是否存在
 | 1    | A/BAYERN/69/2009 | BAYERN  | 2009-1-1  |              |              |              |              |          | ***  | 1          |          |          |
 
 
+
+注意1-input类型为date时，传递到后端的值类型是String类型
+
+```html
+<td><input type="date" id="time" name="time"/></td>
+```
+
+后端也是直接传就行,	格式为`2022-04-01`
 
 ### 3.2 功能
 
