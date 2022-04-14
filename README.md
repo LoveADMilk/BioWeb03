@@ -2,11 +2,19 @@
 
 生信平台
 
+新增**特殊功能1-序列内容对比（同类型）-->获得变异点**
+
+前端使用JS+Thymeleaf进行高亮显示变异点：
+
+
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-4.PNG?raw=true)
+
+
 ## 1 asn文件上传返回PSSM文件
 
 目的：无登录状态下完成上传asn文件与下载PSSM文件
 
-![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/asn%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E4%B8%BAPSSM.PNG?raw=true)
+###### ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/asn%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E4%B8%BAPSSM.PNG?raw=true)
 
 ### 1.1 asn上传部分
 
