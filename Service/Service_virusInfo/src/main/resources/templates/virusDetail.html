@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>相信信息</title>
+    <meta name="author" content="LOVE_AD_MILK">
+    <style>
+        table{
+            border-top: 1px solid #000000;
+            border-left: 1px solid #000000;
+            border-collapse: collapse; /*设置单元格的边框合并为1*/
+        }
+        th{
+            text-align: right;
+        }
+        th, td{
+            border-bottom: 1px solid #000000;
+            border-right: 1px solid #000000;
+            padding: 5px 10px;
+        }
+        select{
+            width: 100px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+<form action="" method="post" name="myForm">
+    <table align="center">
+        <caption>病毒信息表基本模板</caption>
+        <tr>
+            <th>病毒名字：</th>
+            <!--            这里的name要与实体类定义的名字相同，否则无法识别-->
+            <!--            text是单行文本-->
+            <td th:text="${virus.name}"></td>
+        </tr>
+        <tr>
+            <th>所在城市：</th>
+            <td th:text="${virus.address}"></td>
+        </tr>
+        <tr>
+            <th>所处季节：</th>
+            <td th:text="${virus.season}"></td>
+        </tr>
+        <tr>
+            <th>抗原序列：</th>
+            <td th:text="${virus.sequence}"></td>
+        </tr>
+        <tr>
+            <th>具体时间：</th>
+            <td th:text="${virus.time}"></td>
+        </tr>
+        <tr>
+            <th>备注信息：</th>
+            <td th:text="${virus.tip}"></td>
+        </tr>
+
+        <tr>
+            <th>病毒类型：</th>
+            <td th:text="${virus.type}"></td>
+        </tr>
+        <tr>
+            <th>序列类别：</th>
+            <td th:text="${virus.sequenceType}"></td>
+        </tr>
+        <tr>
+            <th>数据来源：</th>
+            <td th:text="${virus.dataFrom}"></td>
+        </tr>
+        <tr>
+            <th>扩展位置: </th>
+            <td>扩展位置</td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -124,6 +124,8 @@ CREATE TABLE `virus` (
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='流感数据表';
 ```
 ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-1.PNG?raw=true)
+
+
 经纬度选择上使用
 
 1.

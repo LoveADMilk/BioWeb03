@@ -17,4 +17,9 @@ public class VirusServoceImpl implements VirusService {
         virusMapper.insertVirus(virus);
         log.info("插入病毒信息成功");
     }
+
+    @Override
+    public Virus selectVirusInfoById(Integer virusId) {
+        return virusMapper.selectById(virusId);
+    }
 }
