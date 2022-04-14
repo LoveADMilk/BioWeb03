@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="first" style="text-align: left; word-break: break-all">
+    <script th:inline="javascript">
+        var str1 = [[${str1Arr}]];
+        var str2 = [[${str2Arr}]];
+        var arr = [[${arr}]];
+        var length = [[${length}]];
+        console.log(str1);
+        console.log(str2);
+        console.log(arr);
+        document.write("菌株1： ");
+        document.write("<br>");
+        for (var i = 0; i < length; i++){
+            if(i != 0 && i%45 == 0){
+                document.write("<font color= black size='5'style='font-family: monospace'>"+i+"  "+"</font>");
+                document.write("<br>");
+            }
+            if (arr[i] == 0){
+                //使用等宽字体，可以使得上下对齐
+                document.write("<font color= #00ffff size='7'style='font-family: monospace'>"+str1[i]+"  "+"</font>");
+            }else if(arr[i] == 1){
+                document.write("<font color=red size='7' style='font-family: monospace'>"+str1[i]+"  "+"</font>");
+            }else{
+                document.write("<font color=black size='7' style='font-family: monospace'>"+str1[i]+"  "+"</font>");
+            }
+        }
+        document.write("<font color= black size='5'style='font-family: monospace'>"+length+"  "+"</font>");
+        document.write("<br>");
+        document.write("菌株2： ");
+        document.write("<br>");
+        for (var i = 0; i < length; i++){
+            if(i !=0 && i%45 == 0){
+                document.write("<font color= black size='5'style='font-family: monospace'>"+i+"  "+"</font>");
+                document.write("<br>");
+            }
+            if (arr[i] == 0){
+                document.write("<font color= #00ffff size='7' style='font-family: monospace'>"+str2[i]+"  "+"</font>");
+            }else if(arr[i] == 1){
+                document.write("<font color=red size='7' style='font-family: monospace'>"+str2[i]+"  "+"</font>");
+            }else{
+                document.write("<font color=black size='7' style='font-family: monospace'>"+str2[i]+"  "+"</font>");
+            }
+        }
+        document.write("<font color= black size='5'style='font-family: monospace'>"+length+"  "+"</font>");
+    </script>
+</div>
+
+</body>
+</html>

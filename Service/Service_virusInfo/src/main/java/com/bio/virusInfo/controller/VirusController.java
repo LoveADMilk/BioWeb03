@@ -2,7 +2,6 @@ package com.bio.virusInfo.controller;
 
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bio.entityModel.model.virusInfo.Virus;
 import com.bio.virusInfo.mapper.VirusMapper;
@@ -58,6 +57,9 @@ public class VirusController {
         model.addAttribute("virus", virus);
         return "virusDetail";
     }
+    /**
+     * 上传Virus
+     * **/
     @RequestMapping("/virusUpload")
     public String virusUpload(Virus virus){
         virus.setUserId(1);//后续扩展JWT验证
@@ -68,6 +70,36 @@ public class VirusController {
         return "index";
     }
 
+    /**
+     * 比较两个病毒序列，返回不同处的高亮
+     * 0 代表缺失 ， 蓝色
+     * 1 代表变异点位 ， 红色
+     * **/
+    @RequestMapping("/virusCompare")
+    public String virusCompare(Model model){
+        //传入三个数组 1个长度值，然后判断如果是-1，那就显示红色
+        String str1 = "DTLCIGYHANNSTDTVDTVLEKNVTVTHSVNLLEDRHNGKLCKLGGIAPLHLGKCNIAGWLLGNPECELLLTVSSWSYIVETSNSDNGTCYPGDFINYEELREQLSSVSSFERFEIFPKTSSWPDHETNXGVTAACPYAGANSFYRNLIWLVKKGNSYPKLSKSYVNNKGKEVLVLWGIHHPPTSTDQQSLYQNADAYVFVGSSKYNRKFKPEIAARPKVRGQAGRMNYYWTLIEPGDTITFEATGNLVVPRYAFAMNRGSGSGIIISDAPVHDCNTKCQTPKGAINTSLPFQNIHPVTIGECPKYVKSTKLRMATGLRNIPSIQSR";
+        String str2 = "DTICIGYHANNSTDTVDTVLEKNVTVTHSVNLLEDSHNGKLCRLKGKAPLQLGKCNIAGWVLGNPECESLLSNRSWSYIAETPNSENGICYPGDFADYEELREQLSSVSSFERFEIFPKERSWPKHNTIRGVTAACSHAGKSSFYKNLVWLTEANGSYPALSTSYVNNQEKEVLVLWGVHHPSNIEEQRTLYRKDNAYVSVVSSNYNRRFTPEIAKRPKVRDQPGRMNYYWTLLEPGDTIIFEATGNLIAPWYAFALSRGPGSGIITSNAPMDECDTKCQTPQGAINSSLPFQNIHPVTIGECPKYVRSTKLRMVTGLRNIPSIQSR";
+        int length = str1.length();
+        char[] str1Arr = str1.toCharArray();
+        char[] str2Arr = str2.toCharArray();
+        int arr[] = new int[length];
+        for(int i = 0; i < length; i++){
+            if(str1Arr[i] != str2Arr[i]){
+                arr[i] = 1;
+            }else if(str1Arr[i] != '-' && str2Arr[i] == '-'){
+                arr[i] = 0;
+            }else{
+                arr[i] = -1;
+            }
+        }
+        model.addAttribute("str1Arr", str1Arr);
+        model.addAttribute("str2Arr", str2Arr);
+        model.addAttribute("arr", arr);
+        model.addAttribute("length", length);
+
+        return "compare";
+    }
 //    @RequestMapping("/testuoload")
 //    public String testuoload(Virus virus){
 //        for (int i = 0; i < 100; i ++){
