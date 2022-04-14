@@ -176,4 +176,46 @@ float,double容易产生误差，对精确度要求比较高时，建议使用de
 
 ### 3.2 功能
 
+
+
+普通功能1-分页显示所有病毒
+
+
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-2.PNG?raw=true)
+
+
+普通功能2-单独显示病毒详细信息
+
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-3.PNG?raw=true)
+
+
+
+
+
+
 特殊功能1-序列内容对比（同类型）-->获得变异点；
+
+
+
+
+
+
+
+**注意点**
+
+Mybatis-plus的分页插件的配置类，**必须和当前业务模块在同一个包下**，不能单独设到配置模块
+
+```java
+@Configuration
+@MapperScan("com.bio.virusInfo.mapper")
+public class VirusConfig {
+
+    /**
+     * 分页插件
+     */
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        return new PaginationInterceptor();
+    }
+}
+```
