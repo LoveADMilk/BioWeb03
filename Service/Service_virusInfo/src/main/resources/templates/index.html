@@ -111,5 +111,52 @@
         </tr>
     </table>
 </form>
+<!--上传滴定数据-->
+<form action="/virusHIUpload" method="post" name="myForm">
+    <table align="center">
+        <caption>病毒滴定数据基本模板</caption>
+        <tr>
+            <th>病毒A名字：</th>
+            <!--            这里的name要与实体类定义的名字相同，否则无法识别-->
+            <!--            text是单行文本-->
+            <td><input type="text" id="nameA" name="nameA"/></td>
+        </tr>
+        <tr>
+            <th>病毒B名字：</th>
+            <td><input type="text" id="nameB" name="nameB"/></td>
+        </tr>
+        <tr>
+            <th>A对B的滴定值：</th>
+            <td><input type="text" id="abHI" name="abHI"/></td>
+        </tr>
+        <tr>
+            <th>B对A的滴定值：</th>
+            <td><input type="text" id="baHI" name="baHI"/></td>
+        </tr>
+        <tr>
+            <th>A对A的滴定值：</th>
+            <td><input type="text" id="aaHI" name="aaHI"/></td>
+        </tr>
+        <tr>
+            <th>B对B的滴定值：</th>
+            <td><input type="text" id="bbHI" name="bbHI"/></td>
+        </tr>
+        <tr>
+            <th>备注信息：</th>
+            <td><textarea name="tip" rows="5" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <th>扩展位置</th>
+            <td>扩展位置</td>
+        </tr>
+        <!-- 以下是提交、取消按钮 -->
+        <tr>
+            <td colspan="2" style="text-align: center; padding: 5px;">
+                <input class="b_button" type="submit" value="提交" />
+                <input class="b_button" type="reset" value="重置" />
+            </td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>

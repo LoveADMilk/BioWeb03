@@ -4,7 +4,10 @@ package com.bio.virusInfo.controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bio.entityModel.model.virusInfo.Virus;
+import com.bio.entityModel.model.virusInfo.VirusHI;
+import com.bio.virusInfo.mapper.VirusHIMapper;
 import com.bio.virusInfo.mapper.VirusMapper;
+import com.bio.virusInfo.service.VirusHIService;
 import com.bio.virusInfo.service.VirusService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -25,6 +27,8 @@ public class VirusController {
     @Autowired
     private VirusService virusService;
 
+    @Autowired
+    private VirusHIService virusHIService;
 
     @Autowired
     private VirusMapper virusMapper;
@@ -42,12 +46,6 @@ public class VirusController {
 //        Page<Virus> virusPage = new Page<>(2,5);
         Page<Virus> virusPage = new Page<>(pn, 10,true);
         Page<Virus> page = virusMapper.selectPage(virusPage, null);
-        System.out.println(virusPage == page);
-        System.out.println(JSON.toJSONString(page));
-        System.out.println(page.getRecords().size());
-        System.out.println(page.getCurrent());
-        System.out.println(page.getSize());
-        System.out.println(page.getTotal());
         model.addAttribute("page", page);
         return "pageIndex";
 
@@ -59,6 +57,7 @@ public class VirusController {
         Virus virus = virusService.selectVirusInfoById(virusId);
         System.out.println(virus);
         model.addAttribute("virus", virus);
+
         return "virusDetail";
     }
     /**
@@ -85,6 +84,14 @@ public class VirusController {
     public String comPareIndex(){
         return "virusCompareRes";
     }
+
+    /**
+     * 输入两个菌株的名字查看对比
+     *
+     * **/
+
+
+
 //    上传菌株的序列后对比
     @RequestMapping("/virusCompareBySequence")
     public String virusCompareBySequence(Model model,
@@ -103,6 +110,44 @@ public class VirusController {
         }
         return "compare";
     }
+
+    /****
+     * 流感滴定数据表与抗原距离表的上传与展示
+     *
+     * 用于机器学习与深度学习
+     *
+     * ***/
+    @RequestMapping("/virusHIUpload")
+    public String virusHIUpload(VirusHI virusHI){
+        virusHI.setUserId(1);
+        Double distance = virusHIService.computeDistance(virusHI.getAbHI(), virusHI.getBaHI(),
+                virusHI.getAaHI(), virusHI.getBbHI());
+        virusHI.setDistance(distance);
+        virusHIService.insertVirusHI(virusHI);
+        return "";
+    }
+
+
+//    @RequestMapping("/testuoload")
+//    public String testuoload(Virus virus){
+//        for (int i = 0; i < 100; i ++){
+//            virus.setUserId(1);//后续扩展JWT验证
+//            virus.setName("A/BAYERN/69/2009");
+//            virus.setAddress("BAYERN");
+//            virus.setLongitude(new BigDecimal("1.1"));//经度，后续查城市的经纬度表进行查询
+//            virus.setLatitude(new BigDecimal("1.1"));//纬度，后续查城市的经纬度表进行查询
+//            virus.setTime("2022-04-01");
+//            virus.setSeason(0);
+//            virus.setType("H1N1");
+//            virus.setSequence("mdvnptllfl");
+//            virus.setSequenceType("HA1");
+//            virus.setDataFrom("web");
+//            virus.setTip("HONGKONG");
+//            System.out.println(virus);
+//            virusService.insertVirus(virus);
+//        }
+//        return "idnex";
+//    }
     /**
      * 比对方法封装
      * 比较两个病毒序列，返回不同处的高亮
@@ -132,28 +177,5 @@ public class VirusController {
         map.put("length", length);
         return map;
     }
-
-
-
-//    @RequestMapping("/testuoload")
-//    public String testuoload(Virus virus){
-//        for (int i = 0; i < 100; i ++){
-//            virus.setUserId(1);//后续扩展JWT验证
-//            virus.setName("A/BAYERN/69/2009");
-//            virus.setAddress("BAYERN");
-//            virus.setLongitude(new BigDecimal("1.1"));//经度，后续查城市的经纬度表进行查询
-//            virus.setLatitude(new BigDecimal("1.1"));//纬度，后续查城市的经纬度表进行查询
-//            virus.setTime("2022-04-01");
-//            virus.setSeason(0);
-//            virus.setType("H1N1");
-//            virus.setSequence("mdvnptllfl");
-//            virus.setSequenceType("HA1");
-//            virus.setDataFrom("web");
-//            virus.setTip("HONGKONG");
-//            System.out.println(virus);
-//            virusService.insertVirus(virus);
-//        }
-//        return "idnex";
-//    }
 
 }
