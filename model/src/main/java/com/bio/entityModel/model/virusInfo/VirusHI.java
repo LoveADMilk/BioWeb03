@@ -43,6 +43,10 @@ public class VirusHI {
     @TableField("distance")
     private Double distance;
 
+    //流感类型(H1N1\H3N1\H5N1...)
+    @TableField("type")
+    private String type;
+
     @TableField("tip")
     private String tip;
 }

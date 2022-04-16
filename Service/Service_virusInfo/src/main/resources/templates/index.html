@@ -142,6 +142,22 @@
             <td><input type="text" id="bbHI" name="bbHI"/></td>
         </tr>
         <tr>
+            <th>病毒类型：</th>
+            <td>
+                <select name="type" class="b_select" >
+                    <option value="">请选择</option>
+                    <!--                    这里可以后期从数据库扩展得到所有类型-->
+                    <!--                    <option th:each="item:${departmentList}"-->
+                    <!--                            th:value="${item.value}" th:text="${item.text}"-->
+                    <!--                            th:selected="${userInfo.departmentCode==item.value}">-->
+                    <!--                    </option>-->
+                    <option value="H1N1">H1N1</option>
+                    <option value="H3N2">H3N2</option>
+                    <option value="H5N1">H5N1</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <th>备注信息：</th>
             <td><textarea name="tip" rows="5" cols="50"></textarea></td>
         </tr>

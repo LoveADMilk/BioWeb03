@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -36,6 +37,12 @@ public class VirusController {
     @RequestMapping("/")
     public String index(){
         return "index";
+    }
+
+    //  访问输入比对页面的数据前端显示页
+    @RequestMapping("compareIndex")
+    public String comPareIndex(){
+        return "virusCompareRes";
     }
 
     //    显示主要信息，然后用户点进去之后显示完整信息
@@ -75,23 +82,13 @@ public class VirusController {
 
     /**
      *
-     * //下一部分就是从前端接受两个菌株的名字、或者是菌株的序列、再或者是选择框选择2个菌株然后提交查看
-     *         //传入三个数组 1个长度值，然后判断如果是-1，那就显示红色
+     * 下一部分就是从前端接受两个菌株的名字、或者是菌株的序列、再或者是选择框选择2个菌株然后提交查看
+     * 传入三个数组 1个长度值，然后判断如果是-1，那就显示红色
      * **/
-
-//  访问输入比对页面的数据前端显示页
-    @RequestMapping("compareIndex")
-    public String comPareIndex(){
-        return "virusCompareRes";
-    }
 
     /**
      * 输入两个菌株的名字查看对比
-     *
      * **/
-
-
-
 //    上传菌株的序列后对比
     @RequestMapping("/virusCompareBySequence")
     public String virusCompareBySequence(Model model,
@@ -113,8 +110,8 @@ public class VirusController {
 
     /****
      * 流感滴定数据表与抗原距离表的上传与展示
-     *
      * 用于机器学习与深度学习
+     * 抗原距离的计算方式有两种，带扩展：若自我滴定为空，就选用方式2
      *
      * ***/
     @RequestMapping("/virusHIUpload")
@@ -126,6 +123,38 @@ public class VirusController {
         virusHIService.insertVirusHI(virusHI);
         return "";
     }
+
+
+    //查看HI详情by virus的Type，由于需要所有的数据应用训练,所以返回所有的滴度值（按病毒类型），也可以指定名字查询， 分页显示
+    //可以下载所有数据的文件 Model model,
+    //                            @RequestParam(value = "type") String type
+    /**
+     * 根据病毒类型分页显示所有hi滴度数据
+     * H1N1、H3N2、H5N1、并做到可以下载所有当前符合类型的数据
+     * **/
+    @RequestMapping("/virusHIInfo")
+    public String virusHIInfo(Model model,
+                              @RequestParam(value = "pn", defaultValue = "1")Integer pn){
+//        List<VirusHI> virusHIList = virusHIService.selectVirusHIByType("H1N1");
+        Page<VirusHI> virusHIPage = new Page<>(pn, 10,true);
+        Page<VirusHI> page = virusHIService.selectVirusHIByTypePage(virusHIPage,"H1N1");
+        System.out.println(page.getRecords());
+        return "virusHIDetail";
+    }
+    /**
+     * 根据病毒名字，由于病毒可能是A也可能是B所以找到所有满足条件的
+     * 分页显示所有hi滴度数据
+     ***/
+    @RequestMapping("/virusHIInfoByName")
+    public String virusHIInfoByName(Model model,
+                              @RequestParam(value = "pn", defaultValue = "1")Integer pn){
+//        List<VirusHI> virusHIList = virusHIService.selectVirusHIByType("H1N1");
+        Page<VirusHI> virusHIPage = new Page<>(pn, 10,true);
+        Page<VirusHI> page = virusHIService.selectVirusHIByNamePage(virusHIPage,"A");
+        System.out.println(page.getRecords());
+        return "virusHIDetail";
+    }
+
 
 
 //    @RequestMapping("/testuoload")
