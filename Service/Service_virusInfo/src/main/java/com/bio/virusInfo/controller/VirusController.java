@@ -57,6 +57,7 @@ public class VirusController {
     public String virusHIInfoSelectHtml(){
         return "virusHIInfoSelect";
     }
+
     /////////////////////////////
     //    显示virus主要信息，然后用户点进去之后显示完整信息
 //      分页显示
