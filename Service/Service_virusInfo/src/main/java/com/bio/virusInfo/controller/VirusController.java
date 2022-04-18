@@ -1,6 +1,5 @@
 package com.bio.virusInfo.controller;
 
-
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bio.entityModel.model.virusInfo.Virus;
@@ -34,6 +33,9 @@ public class VirusController {
     @Autowired
     private VirusMapper virusMapper;
 
+    /**
+     * 此部分内容用于跳转到相关页面
+     * **/
     @RequestMapping("/")
     public String index(){
         return "myIndex";
@@ -47,18 +49,26 @@ public class VirusController {
     public String analyseVirusSequenceHtml(){
         return "analyseVirusSequence";
     }
-
-
-    //    显示主要信息，然后用户点进去之后显示完整信息
+    @RequestMapping("/uploadVirusHIHtml")//进入病毒序列比对页面
+    public String uploadVirusHIHtml(){
+        return "uploadVirusHI";
+    }
+    @RequestMapping("/virusHIInfoSelectHtml")//进入选择以什么方式获得hi数据，by type, 还是 by name
+    public String virusHIInfoSelectHtml(){
+        return "virusHIInfoSelect";
+    }
+    /////////////////////////////
+    //    显示virus主要信息，然后用户点进去之后显示完整信息
 //      分页显示
     @RequestMapping("/list")
     public String searchAll(Model model,
                             @RequestParam(value = "pn", defaultValue = "1")Integer pn){
 //        Page<Virus> virusPage = new Page<>(2,5);
+        System.out.println("index"+pn);
         Page<Virus> virusPage = new Page<>(pn, 10,true);
         Page<Virus> page = virusMapper.selectPage(virusPage, null);
         model.addAttribute("page", page);
-        return "pageIndex";
+        return "virusInfoPage";
 
     }
     //查看详情by virus的Id
@@ -68,7 +78,6 @@ public class VirusController {
         Virus virus = virusService.selectVirusInfoById(virusId);
         System.out.println(virus);
         model.addAttribute("virus", virus);
-
         return "virusDetail";
     }
     /**
@@ -127,7 +136,7 @@ public class VirusController {
                 virusHI.getAaHI(), virusHI.getBbHI());
         virusHI.setDistance(distance);
         virusHIService.insertVirusHI(virusHI);
-        return "";
+        return "uploadVirusHI";
     }
 
 
@@ -138,14 +147,30 @@ public class VirusController {
      * 根据病毒类型分页显示所有hi滴度数据
      * H1N1、H3N2、H5N1、并做到可以下载所有当前符合类型的数据
      * **/
-    @RequestMapping("/virusHIInfo")
-    public String virusHIInfo(Model model,
-                              @RequestParam(value = "pn", defaultValue = "1")Integer pn){
-//        List<VirusHI> virusHIList = virusHIService.selectVirusHIByType("H1N1");
+    @RequestMapping("/virusHIInfoByType")
+    public String virusHIInfoByType(Model model,
+                              @RequestParam(value = "pn", defaultValue = "1")Integer pn,
+                              @RequestParam(value = "requestType",required = false)String requestType,
+                              @ModelAttribute(value = "type") String type){
         Page<VirusHI> virusHIPage = new Page<>(pn, 10,true);
-        Page<VirusHI> page = virusHIService.selectVirusHIByTypePage(virusHIPage,"H1N1");
+        String usefulType;
+        if(type.equals("")){
+            usefulType = requestType;
+        }else{
+            usefulType = type;
+        }
+        System.out.println(usefulType);
+        Page<VirusHI> page = virusHIService.selectVirusHIByTypePage(virusHIPage,usefulType);
+
+        if (type.equals("")){
+            model.addAttribute("currentType", requestType); //后续都通过路径传入type
+        }else{
+            model.addAttribute("currentType", type); //将当前的类型传回去，方便下一页使用
+        }
+        model.addAttribute("page", page);
+
         System.out.println(page.getRecords());
-        return "virusHIDetail";
+        return "virusHIPageByType";
     }
     /**
      * 根据病毒名字，由于病毒可能是A也可能是B所以找到所有满足条件的
@@ -153,12 +178,14 @@ public class VirusController {
      ***/
     @RequestMapping("/virusHIInfoByName")
     public String virusHIInfoByName(Model model,
-                              @RequestParam(value = "pn", defaultValue = "1")Integer pn){
+                              @RequestParam(value = "pn", defaultValue = "1")Integer pn,
+                              @ModelAttribute(value = "name") String name){
 //        List<VirusHI> virusHIList = virusHIService.selectVirusHIByType("H1N1");
         Page<VirusHI> virusHIPage = new Page<>(pn, 10,true);
-        Page<VirusHI> page = virusHIService.selectVirusHIByNamePage(virusHIPage,"A");
+        Page<VirusHI> page = virusHIService.selectVirusHIByNamePage(virusHIPage,name);
+        model.addAttribute("page", page);
         System.out.println(page.getRecords());
-        return "virusHIDetail";
+        return "";
     }
 
 
