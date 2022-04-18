@@ -2,4 +2,4 @@
 *.js linguist-language=Java
 *.css linguist-language=Java
 *.html linguist-language=Java
-*.SCSS linguist-language=Java
+*.scss linguist-language=Java
