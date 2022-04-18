@@ -2,12 +2,14 @@
 
 生信平台
 
+# ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/index.PNG?raw=true)
+
+
 新增**特殊功能1-序列内容对比（同类型）-->获得变异点**
 
 前端使用JS+Thymeleaf进行高亮显示变异点：
 
-
-![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-4.PNG?raw=true)
+# ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-4.PNG?raw=true)
 
 
 ## 1 asn文件上传返回PSSM文件
