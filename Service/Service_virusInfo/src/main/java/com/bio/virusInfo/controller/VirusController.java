@@ -36,14 +36,18 @@ public class VirusController {
 
     @RequestMapping("/")
     public String index(){
-        return "index";
+        return "myIndex";
     }
 
-    //  访问输入比对页面的数据前端显示页
-    @RequestMapping("compareIndex")
-    public String comPareIndex(){
-        return "virusCompareRes";
+    @RequestMapping("/uploadVirusHtml")//进入上传病毒信息页面
+    public String uploadVirusHtml(){
+        return "uploadVirus";
     }
+    @RequestMapping("/analyseVirusSequenceHtml")//进入病毒序列比对页面
+    public String analyseVirusSequenceHtml(){
+        return "analyseVirusSequence";
+    }
+
 
     //    显示主要信息，然后用户点进去之后显示完整信息
 //      分页显示
@@ -77,16 +81,18 @@ public class VirusController {
         virus.setLatitude(new BigDecimal("1.1"));//纬度，后续查城市的经纬度表进行查询
         System.out.println(virus);
         virusService.insertVirus(virus);
-        return "index";
+        return "uploadVirus";
     }
 
     /**
      *
-     * 下一部分就是从前端接受两个菌株的名字、或者是菌株的序列、再或者是选择框选择2个菌株然后提交查看
+     * @// TODO: 2022/4/17  下一部分就是从前端接受两个菌株的名字、或者是菌株的序列、再或者是选择框选择2个菌株然后提交查看
      * 传入三个数组 1个长度值，然后判断如果是-1，那就显示红色
+     *
      * **/
 
     /**
+     *
      * 输入两个菌株的名字查看对比
      * **/
 //    上传菌株的序列后对比
