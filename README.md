@@ -27,7 +27,7 @@
 
 具体设计
 
-[BioWeb03/功能2 登录功能.md at master · LoveADMilk/BioWeb03 (github.com)](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/功能2 登录功能.md)
+[BioWeb03/功能2-登录功能.md at master · LoveADMilk/BioWeb03 (github.com)](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/功能2 登录功能.md)
 
 ## 3 流感数据信息
 
@@ -35,4 +35,4 @@
 
 具体设计：
 
-[BioWeb03/功能3 流感数据信息.md at master · LoveADMilk/BioWeb03 (github.com)](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/功能3 流感数据信息.md)
+[BioWeb03/功能3-流感数据信息.md at master · LoveADMilk/BioWeb03 (github.com)](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/功能3 流感数据信息.md)
