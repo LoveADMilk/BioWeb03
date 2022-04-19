@@ -99,7 +99,7 @@ public class PSSMTransformController {
         log.info(String.valueOf("完整列表为"+redisTemplate.opsForList().range(keyFileName, 0, len)));
 
         //利用RestTemplate实现调用并且传入该批次的Redis的Key值
-        String url = "http://127.0.0.1:5000" + "/" + keyFileName + "/";//Flask启动的默认端口
+        String url = "http://127.0.0.1:5000/uploadFile" + "/" + keyFileName + "/";//Flask启动的默认端口
 
         log.info("访问Flask的网址为" + url);
         HttpMethod httpMethod = HttpMethod.GET;//Flask 在开启端口的时候默认是get访问
