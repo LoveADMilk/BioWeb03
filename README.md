@@ -4,21 +4,21 @@
 
 # ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/index.PNG?raw=true)
 
-新增特殊功能2-定时任务之论文爬取
+- 新增特殊功能2-定时任务之论文爬取
 
-通过爬虫爬取Google scholar 使得获得**最前沿**相关文献，并存入数据库
-
-具体设计与代码：
-
-[BioWeb-Flask/ExtractPaper.py at master · LoveADMilk/BioWeb-Flask (github.com)](https://github.com/LoveADMilk/BioWeb-Flask/blob/master/ExtractPaper.py)
+    通过爬虫爬取Google scholar 使得获得**最前沿**相关文献，并存入数据库
+    
+    具体设计与代码：
+    
+    [BioWeb-Flask/ExtractPaper.py at master · LoveADMilk/BioWeb-Flask (github.com)](https://github.com/LoveADMilk/BioWeb-Flask/blob/master/ExtractPaper.py)
 
 简介-`@Scheduled`做循环定时任务，访问Flask端口，利用python的beauty soup做爬虫，然后存入数据库
 
-新增**特殊功能1-序列内容对比（同类型）-->获得变异点**
+- 新增**特殊功能1-序列内容对比（同类型）-->获得变异点**
 
-前端使用JS+Thymeleaf进行高亮显示变异点：
-
-# ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-4.PNG?raw=true)
+    前端使用JS+Thymeleaf进行高亮显示变异点：
+    
+    # ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-4.PNG?raw=true)
 
 
 ## 1 asn文件上传返回PSSM文件
@@ -70,3 +70,4 @@ CREATE TABLE `paper` (
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='论文表';
 ```
 
+接下来的任务是，挂在后台爬取论文，其次完成spring boot 相关的论文模块相关业务功能，完善flask端的定时任务接口内容
