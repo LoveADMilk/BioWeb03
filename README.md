@@ -7,8 +7,9 @@
 - 新增特殊功能2-定时任务之论文爬取
 
     通过爬虫爬取Google scholar 使得获得**最前沿**相关文献，并存入数据库
+  ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/4-1.PNG?raw=true)
     
-    具体设计与代码：
+    爬虫具体设计与代码：
     
     [BioWeb-Flask/ExtractPaper.py at master · LoveADMilk/BioWeb-Flask (github.com)](https://github.com/LoveADMilk/BioWeb-Flask/blob/master/ExtractPaper.py)
 
@@ -51,8 +52,34 @@
 
 ## 4 流感相关论文模块
 
+具体设计：
+
+[BioWeb03/功能4-流感相关论文模块.md at master · LoveADMilk/BioWeb03 (github.com)](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/功能4-流感相关论文模块.md)
 
 可以显示前沿论文的相关信息
+
+访问路径：`http://localhost:8151/allPaperPage?pn=1&time=2022&order=reverse`
+
+服务端用@RequestParam接受
+
+定时任务爬虫爬取论文数据 -> 存入MySQL中
+
+前端显示页面：
+
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/4-1.PNG?raw=true)
+
+可以根据时间查询对象年份的论文，并根据引用数递增递减显示
+
+因此主要处理四种情况：
+
+- time & order全为空的情况，就是默认paper表的全部内容
+- order不为空 time不空,那就是按照年份条件得到结果，并order by引用数，判断其order内容选择正反序列 positive->ASC递增 reverse->desc递减
+- order为空 time不空，那就是按照年份条件得到结果
+- order不为空 time空，那就是默认排序下，order by引用数，判断其order内容选择正反序列 positive->ASC递增 reverse->desc递减
+
+分别进行查询操作并返回到前端
+
+sql:
 
 ```sql
 CREATE TABLE `paper` (
@@ -70,4 +97,3 @@ CREATE TABLE `paper` (
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='论文表';
 ```
 
-接下来的任务是，挂在后台爬取论文，其次完成spring boot 相关的论文模块相关业务功能，完善flask端的定时任务接口内容
