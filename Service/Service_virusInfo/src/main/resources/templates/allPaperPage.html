@@ -66,25 +66,6 @@
     <div class="spotlight-holder py-sm pt-lg-lg">
         <div class="container d-flex align-items-center">
             <div class="row cols-xs-space cols-sm-space cols-md-space align-items-center justify-content-around">
-                <div class="col-lg-5 text-center">
-<!--                    <h2 class="heading h1 text-white strong-400">-->
-<!--                        甲型流感数据收集分析平台-->
-<!--                    </h2>-->
-<!--                    <p class="lead text-white mt-4">-->
-<!--                        甲型流感数据收集分析-这里是没想好怎么写的简介..................................-->
-<!--                    </p>-->
-<!--                    <a href="#" target="_blank" class="btn bg-white mt-4">-->
-<!--                        Learn more-->
-<!--                    </a>-->
-                </div>
-                <div class="col-lg-7">
-                    <div class="input-group mb-3">
-<!--                        <input type="text" class="form-control" placeholder="Search for virus antigen  Sequence" aria-label="Recipient's username" aria-describedby="basic-addon2">-->
-<!--                        <div class="input-group-append">-->
-<!--                            <button class="btn btn-primary" type="button">search</button>-->
-<!--                        </div>-->
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -93,46 +74,79 @@
 <section class="slice slice-lg" data-delimiter="1">
     <div class="container">
         <div class="mb-md text-center">
-            <h3 class="heading h3">VirusHI</h3>
+            <h3 class="heading h3">Related Paper</h3>
             <div class="fluid-paragraph text-center mt-4">
-                <p class="lead lh-180">此处文本内容待写.................................................</p>
+                <p class="lead lh-180">key words : Influenza A virus Antigenic distance deep learning</p>
+                <p class="lead lh-180">每月1日凌晨2点自动更新论文</p>
             </div>
         </div>
         <div class="row-wrapper">
+            <div class="row mb-4">
+                <div class="col-md-2">
+                    <select class="selectpicker" onchange="s_click(this)" title="select year" data-live-search="true" data-live-search-placeholder="Search ...">
+<!--                        <option value="http://localhost:8151/allPaperPage?pn=1&time=2022">2022</option>-->
+<!--                        <option value="http://localhost:8151/allPaperPage?pn=1&time=2021">2021</option>-->
+<!--                        <option value="http://localhost:8151/allPaperPage?pn=1&time=2020">2020</option>-->=
+                        <option value="http://localhost:8151/allPaperPage?pn=1">all year</option>
+                        <th:block th:each="i:${#numbers.sequence(2022,1950,-1)}">
+                            <option th:value="${preflex}+${i}" th:text="${i}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="col-md-1">
 
+                    <a th:href="@{/allPaperPage(pn=1,time=${time},order='positive')}">引用数 <i class="fas fa-arrow-up"></i></a>
+                    <a th:href="@{/allPaperPage(pn=1,time=${time},order='reverse')}">引用数 <i class="fas fa-arrow-down"></i></a>
+
+                </div>
+
+                <script type="text/javascript">
+                    //select跳页
+                    function s_click(obj) {
+                        var num = 0;
+                        for (var i = 0; i < obj.options.length; i++) {
+                            if (obj.options[i].selected == true) {
+                                num++;
+                            }
+                        }
+                        if (num == 1) {
+                            var url = obj.options[obj.selectedIndex].value;
+                            window.open(url, "_self"); //这里修改打开连接方式
+                        }
+                    }
+                </script>
 
             <table class="table table-hover table-cards align-items-center">
                 <thead>
                 <tr>
-                    <th scope="col">Virus NameA</th>
-                    <th scope="col">Virus NameB</th>
-                    <th scope="col">A for B</th>
-                    <th scope="col">B for A</th>
-                    <th scope="col">A for A</th>
-                    <th scope="col">B for B</th>
-                    <th scope="col">distance</th>
-                    <th scope="col">tips</th>
+                    <th scope="col">Paper List(默认相关度排序)</th>
 
-
+                    <th scope="col">年份</th>
+                    <th scope="col">引用</th>
+                    <th scope="col">PDF</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="bg-white" th:each="virus:${page.records}">
+                <tr class="bg-white" th:each="paper:${page.records}">
                     <th scope="row">
                         <div class="media align-items-center">
                             <div class="media-body">
-                                <h6 class="h5 font-weight-normal mb-0" th:text="${virus.nameA}"></h6>
+                                <a th:href="${paper.address}"> <h6 class="h5 font-weight-normal mb-0" th:text="${paper.name}"></h6></a>
 
+                                <span class="font-weight-normal text-muted" th:text="${paper.author}"></span>
                             </div>
                         </div>
                     </th>
-                    <td><h6 class="h5 font-weight-normal mb-0" th:text="${virus.nameB}"></h6></td>
-                    <td th:text="${virus.abHI}"></td>
-                    <td th:text="${virus.baHI}"></td>
-                    <td th:text="${virus.aaHI}"></td>
-                    <td th:text="${virus.bbHI}"></td>
-                    <td th:text="${virus.distance}"></td>
-                    <td th:text="${virus.tip}"></td>
+                    <td th:text="${paper.year}"></td>
+                    <td th:text="${paper.citations}"></td>
+                    <th:block th:if="${paper.pdf==''}">
+                        <td>PDF</td>
+                    </th:block>
+                    <th:block th:if="${paper.pdf!=''}">
+                        <td><a th:href="${paper.pdf}">PDF</a></td>
+                    </th:block>
+
+
                 </tr>
                 <tr class="table-divider"></tr>
 
@@ -143,7 +157,7 @@
         <div class="row">
             <!--分页文字信息  -->
             <div class="col-md-6" >当前 [[${page.current}]]页,总[[${page.pages}]]
-                页,总[[ ${page.total}]] 条记录 [[${currentType}]]</div>
+                页,总[[ ${page.total}]] 条记录</div>
 
             <!-- 分页条信息 -->
             <div class="col-md-6">
@@ -154,13 +168,13 @@
                             <li class="page-item active,disabled">
                                 <a class="page-link">首页</a></li>
                         </th:block>
-
+<!--                        如果当前页大于1，那就使得首页点击后可以跳转到第1页-->
                         <th:block th:if="${page.current>1}">
-                            <li class="page-item"><a class="page-link" th:href="@{/virusHIInfoByType(pn=1, requestType=${currentType})}">首页</a></li>
+                            <li class="page-item"><a class="page-link" th:href="@{/allPaperPage(pn=1,time=${time},order=${order})}">首页</a></li>
                         </th:block>
-
+<!--                         左箭头的显示-->
                         <li class="page-item" th:if="${page.hasPrevious()}">
-                            <a class="page-link"  th:href="@{/virusHIInfoByType(pn=${page.getCurrent()-1}, requestType=${currentType})}">
+                            <a class="page-link"  th:href="@{/allPaperPage(pn=${page.getCurrent()-1},time=${time},order=${order})}">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -175,16 +189,15 @@
 
                             <th:block th:if="${page.getCurrent()!=i}">
                                 <li class="page-item">
-                                    <a class="page-link" th:text="${i}" th:href="@{/allPaperPage(pn=${i})}"></a>
+                                    <a class="page-link" th:text="${i}" th:href="@{/allPaperPage(pn=${i},time=${time},order=${order})}"></a>
                                 </li>
                             </th:block>
 
                         </th:block>
                         <!--遍历页码，只显示五页，点击下一页之后，每次多遍历两个页码-->
-                        <th:block  th:if="${page.getCurrent()<=3 && page.getPages() >= 5}" th:each="i:${#numbers.sequence(1,5)}">
+                        <th:block  th:if="${page.getCurrent()<=3 && page.getPages()>=5}" th:each="i:${#numbers.sequence(1,5)}">
                             <!--加判断是不是当前页，如果是 高亮显示，并且取消超链接，这样避免了点击当前页重复发送请求查询数据-->
                             <th:block th:if="${page.getCurrent()==i}">
-
                                 <li  class=" page-item active" >
                                     <a class="page-link" th:text="${i}"></a>
                                 </li>
@@ -192,13 +205,13 @@
 
                             <th:block th:if="${page.getCurrent()!=i}">
                                 <li class="page-item">
-                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByType(pn=${i},requestType=${currentType})}"></a>
+                                    <a class="page-link" th:text="${i}" th:href="@{/allPaperPage(pn=${i},time=${time},order=${order})}"></a>
                                 </li>
                             </th:block>
                         </th:block>
 
 
-                        <th:block th:if="${page.getCurrent()>3 && page.getCurrent()+2<=page.getPages() && page.getPages() >= 5}"
+                        <th:block th:if="${page.getCurrent()>3 && page.getCurrent()+2<=page.getPages() && page.getPages()>=5}"
                                   th:each="i:${#numbers.sequence(page.getCurrent()-2,page.getCurrent()+2)}">
                             <!--同理上-->
                             <th:block th:if="${page.getCurrent()==i}">
@@ -210,14 +223,12 @@
 
                             <th:block th:if="${page.getCurrent()!=i}">
                                 <li class="page-item">
-                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByType(pn=${i}, requestType=${currentType})}"></a>
+                                    <a class="page-link" th:text="${i}" th:href="@{/allPaperPage(pn=${i},time=${time},order=${order})}"></a>
                                 </li>
                             </th:block>
                         </th:block>
 
-
-
-                        <th:block th:if="${page.getCurrent()+2>page.getPages() && page.getPages() >= 5}"
+                        <th:block th:if="${page.getCurrent()+2>page.getPages() && page.getPages()>=5}"
                                   th:each="i:${#numbers.sequence(page.getPages()-4,page.getPages())}">
                             <!--同理上-->
                             <th:block th:if="${page.getCurrent()==i}">
@@ -229,7 +240,7 @@
 
                             <th:block th:if="${page.getCurrent()!=i}">
                                 <li class="page-item">
-                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByType(pn=${i}, requestType=${currentType})}"></a>
+                                    <a class="page-link" th:text="${i}" th:href="@{/allPaperPage(pn=${i},time=${time},order=${order})}"></a>
                                 </li>
                             </th:block>
                         </th:block>
@@ -237,14 +248,13 @@
 
                         <!--下一页-->
                         <li class="page-item" th:if="${page.hasNext()}">
-                            <a class="page-link" th:href="@{/virusHIInfoByType(pn=${page.current+1}, requestType=${currentType})}">
+                            <a class="page-link" th:href="@{/allPaperPage(pn=${page.current+1},time=${time},order=${order})}">
                                 <span aria-hidden="true">&raquo;</span>
-                            </a></li>
-
-
+                            </a>
+                        </li>
                         <!--点击末页会跳转到最后一页，并且最后一页禁用-->
                         <th:block th:if="${page.current<page.pages}">
-                            <li class="page-item" > <a class="page-link" th:href="@{/virusHIInfoByType(pn=${page.pages}, requestType=${currentType})}">末页</a></li>
+                            <li class="page-item" > <a class="page-link" th:href="@{/allPaperPage(pn=${page.pages},time=${time},order=${order})}">末页</a></li>
                         </th:block>
 
                         <th:block th:if="${page.current==page.pages}">
@@ -255,10 +265,9 @@
                 </nav>
             </div>
         </div>
+
+
     </div>
 </section>
-
-</main>
-
 </body>
 </html>

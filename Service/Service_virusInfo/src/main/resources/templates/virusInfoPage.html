@@ -214,9 +214,8 @@
 							<li class="page-item" th:if="${page.hasNext()}">
 								<a class="page-link" th:href="@{/list(pn=${page.current+1})}">
 									<span aria-hidden="true">&raquo;</span>
-								</a></li>
-
-
+								</a>
+							</li>
 							<!--点击末页会跳转到最后一页，并且最后一页禁用-->
 							<th:block th:if="${page.current<page.pages}">
 								<li class="page-item" > <a class="page-link" th:href="@{/list(pn=${page.pages})}">末页</a></li>
@@ -224,7 +223,6 @@
 
 							<th:block th:if="${page.current==page.pages}">
 								<li class="page-item active,disabled"> <a class="page-link">末页</a></li>
-
 							</th:block>
 
 						</ul>
