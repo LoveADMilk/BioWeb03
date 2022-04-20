@@ -154,9 +154,24 @@
 									<span aria-hidden="true">&laquo;</span>
 								</a>
 							</li>
+							<!--遍历页码，小于五页，点击下一页之后，每次多遍历两个页码-->
+							<th:block  th:if="${page.getPages() < 5}" th:each="i:${#numbers.sequence(1,page.getPages())}">
+								<!--加判断是不是当前页，如果是 高亮显示，并且取消超链接，这样避免了点击当前页重复发送请求查询数据-->
+								<th:block th:if="${page.getCurrent()==i}">
+									<li  class=" page-item active" >
+										<a class="page-link" th:text="${i}"></a>
+									</li>
+								</th:block>
 
+								<th:block th:if="${page.getCurrent()!=i}">
+									<li class="page-item">
+										<a class="page-link" th:text="${i}" th:href="@{/allPaperPage(pn=${i},time=${time},order=${order})}"></a>
+									</li>
+								</th:block>
+
+							</th:block>
 							<!--遍历页码，只显示五页，点击下一页之后，每次多遍历两个页码-->
-							<th:block  th:if="${page.getCurrent()<=3}" th:each="i:${#numbers.sequence(1,5)}">
+							<th:block  th:if="${page.getCurrent()<=3 && page.getPages() >= 5}" th:each="i:${#numbers.sequence(1,5)}">
 								<!--加判断是不是当前页，如果是 高亮显示，并且取消超链接，这样避免了点击当前页重复发送请求查询数据-->
 								<th:block th:if="${page.getCurrent()==i}">
 
@@ -173,7 +188,7 @@
 							</th:block>
 
 
-							<th:block th:if="${page.getCurrent()>3 && page.getCurrent()+2<=page.getPages()}"
+							<th:block th:if="${page.getCurrent()>3 && page.getCurrent()+2<=page.getPages()  && page.getPages() >= 5}"
 									  th:each="i:${#numbers.sequence(page.getCurrent()-2,page.getCurrent()+2)}">
 								<!--同理上-->
 								<th:block th:if="${page.getCurrent()==i}">
@@ -192,7 +207,7 @@
 
 
 
-							<th:block th:if="${page.getCurrent()+2>page.getPages()}"
+							<th:block th:if="${page.getCurrent()+2>page.getPages() && page.getPages() >= 5}"
 									  th:each="i:${#numbers.sequence(page.getPages()-4,page.getPages())}">
 								<!--同理上-->
 								<th:block th:if="${page.getCurrent()==i}">

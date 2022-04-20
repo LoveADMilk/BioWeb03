@@ -147,6 +147,7 @@ public class VirusController {
     /**
      * 根据病毒类型分页显示所有hi滴度数据
      * H1N1、H3N2、H5N1、并做到可以下载所有当前符合类型的数据
+     * 整个写的不好，最好用name的方式，在路径中传参，具体看paper的controller
      * **/
     @RequestMapping("/virusHIInfoByType")
     public String virusHIInfoByType(Model model,
@@ -180,13 +181,13 @@ public class VirusController {
     @RequestMapping("/virusHIInfoByName")
     public String virusHIInfoByName(Model model,
                               @RequestParam(value = "pn", defaultValue = "1")Integer pn,
-                              @ModelAttribute(value = "name") String name){
-//        List<VirusHI> virusHIList = virusHIService.selectVirusHIByType("H1N1");
+                              @RequestParam(value = "name",required = false)String name){
         Page<VirusHI> virusHIPage = new Page<>(pn, 10,true);
-        Page<VirusHI> page = virusHIService.selectVirusHIByNamePage(virusHIPage,name);
+        Page<VirusHI> page = virusHIService.selectVirusHIByNamePage(virusHIPage, name);
         model.addAttribute("page", page);
+        model.addAttribute("name", name);
         System.out.println(page.getRecords());
-        return "";
+        return "virusHIPageByName";
     }
 
 

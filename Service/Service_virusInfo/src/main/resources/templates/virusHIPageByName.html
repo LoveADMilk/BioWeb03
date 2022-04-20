@@ -67,22 +67,22 @@
         <div class="container d-flex align-items-center">
             <div class="row cols-xs-space cols-sm-space cols-md-space align-items-center justify-content-around">
                 <div class="col-lg-5 text-center">
-<!--                    <h2 class="heading h1 text-white strong-400">-->
-<!--                        甲型流感数据收集分析平台-->
-<!--                    </h2>-->
-<!--                    <p class="lead text-white mt-4">-->
-<!--                        甲型流感数据收集分析-这里是没想好怎么写的简介..................................-->
-<!--                    </p>-->
-<!--                    <a href="#" target="_blank" class="btn bg-white mt-4">-->
-<!--                        Learn more-->
-<!--                    </a>-->
+                    <!--                    <h2 class="heading h1 text-white strong-400">-->
+                    <!--                        甲型流感数据收集分析平台-->
+                    <!--                    </h2>-->
+                    <!--                    <p class="lead text-white mt-4">-->
+                    <!--                        甲型流感数据收集分析-这里是没想好怎么写的简介..................................-->
+                    <!--                    </p>-->
+                    <!--                    <a href="#" target="_blank" class="btn bg-white mt-4">-->
+                    <!--                        Learn more-->
+                    <!--                    </a>-->
                 </div>
                 <div class="col-lg-7">
                     <div class="input-group mb-3">
-<!--                        <input type="text" class="form-control" placeholder="Search for virus antigen  Sequence" aria-label="Recipient's username" aria-describedby="basic-addon2">-->
-<!--                        <div class="input-group-append">-->
-<!--                            <button class="btn btn-primary" type="button">search</button>-->
-<!--                        </div>-->
+                        <!--                        <input type="text" class="form-control" placeholder="Search for virus antigen  Sequence" aria-label="Recipient's username" aria-describedby="basic-addon2">-->
+                        <!--                        <div class="input-group-append">-->
+                        <!--                            <button class="btn btn-primary" type="button">search</button>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -156,11 +156,11 @@
                         </th:block>
 
                         <th:block th:if="${page.current>1}">
-                            <li class="page-item"><a class="page-link" th:href="@{/virusHIInfoByType(pn=1, requestType=${currentType})}">首页</a></li>
+                            <li class="page-item"><a class="page-link" th:href="@{/virusHIInfoByName(pn=1, name=${name})}">首页</a></li>
                         </th:block>
 
                         <li class="page-item" th:if="${page.hasPrevious()}">
-                            <a class="page-link"  th:href="@{/virusHIInfoByType(pn=${page.getCurrent()-1}, requestType=${currentType})}">
+                            <a class="page-link"  th:href="@{/virusHIInfoByName(pn=${page.getCurrent()-1}, name=${name})}">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -175,7 +175,7 @@
 
                             <th:block th:if="${page.getCurrent()!=i}">
                                 <li class="page-item">
-                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByType(pn=${i})}"></a>
+                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByName(pn=${page.getCurrent()-1}, name=${name})}"></a>
                                 </li>
                             </th:block>
 
@@ -192,7 +192,7 @@
 
                             <th:block th:if="${page.getCurrent()!=i}">
                                 <li class="page-item">
-                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByType(pn=${i},requestType=${currentType})}"></a>
+                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByName(pn=${page.getCurrent()-1}, name=${name})}"></a>
                                 </li>
                             </th:block>
                         </th:block>
@@ -210,7 +210,7 @@
 
                             <th:block th:if="${page.getCurrent()!=i}">
                                 <li class="page-item">
-                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByType(pn=${i}, requestType=${currentType})}"></a>
+                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByName(pn=${page.getCurrent()-1}, name=${name})}"></a>
                                 </li>
                             </th:block>
                         </th:block>
@@ -229,7 +229,7 @@
 
                             <th:block th:if="${page.getCurrent()!=i}">
                                 <li class="page-item">
-                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByType(pn=${i}, requestType=${currentType})}"></a>
+                                    <a class="page-link" th:text="${i}" th:href="@{/virusHIInfoByName(pn=${page.getCurrent()-1}, name=${name})}"></a>
                                 </li>
                             </th:block>
                         </th:block>
@@ -237,14 +237,14 @@
 
                         <!--下一页-->
                         <li class="page-item" th:if="${page.hasNext()}">
-                            <a class="page-link" th:href="@{/virusHIInfoByType(pn=${page.current+1}, requestType=${currentType})}">
+                            <a class="page-link" th:href="@{/virusHIInfoByName(pn=${page.getCurrent()-1}, name=${name})}">
                                 <span aria-hidden="true">&raquo;</span>
                             </a></li>
 
 
                         <!--点击末页会跳转到最后一页，并且最后一页禁用-->
                         <th:block th:if="${page.current<page.pages}">
-                            <li class="page-item" > <a class="page-link" th:href="@{/virusHIInfoByType(pn=${page.pages}, requestType=${currentType})}">末页</a></li>
+                            <li class="page-item" > <a class="page-link" th:href="@{/virusHIInfoByName(pn=${page.getCurrent()-1}, name=${name})}">末页</a></li>
                         </th:block>
 
                         <th:block th:if="${page.current==page.pages}">
