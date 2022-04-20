@@ -27,7 +27,7 @@ public class PSSMTransformController {
 
     @GetMapping("/uploadPSSM")
     public String UploadPSSM(){
-        return "upload";
+        return "uploadASNFile";
     }
 
     @Autowired
@@ -113,7 +113,7 @@ public class PSSMTransformController {
         model.addAttribute("keyFileName", keyFileName);
         model.addAttribute("realPathMap",realPathMap);
 
-        return "UploadSuccessed";
+        return "downloadPSSM";
         //加入key时出现乱码--》解决办法：配置类新加入序列化
     }
 

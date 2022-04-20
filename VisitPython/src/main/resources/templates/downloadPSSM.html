@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Probably the most complete UI kit out there. Multiple functionalities and controls added,  extended color palette and beautiful typography, designed as its own extended version of Bootstrap at  the highest level of quality.                             ">
+    <meta name="author" content="Webpixels">
+    <title>Bio Web</title>
+    <!-- Fonts -->
+    <!--   FontAwesome 在Thymeleaf生效需要导入这三个链接 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+    <!-- Theme CSS -->
+    <link type="text/css" rel="stylesheet"  th:href="@{/css/theme.css}">
+    <!-- Demo CSS - No need to use these in your project -->
+    <link type="text/css"  rel="stylesheet" th:href="@{/css/demo.css}">
+    <!-- Core -->
+    <script type="text/javascript" th:src="@{~/vendor/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/vendor/popper/popper.min.js}" ></script>
+    <script type="text/javascript" th:src="@{~/js/bootstrap/bootstrap.min.js}"></script>
+    <!-- FontAwesome 5 -->
+    <script type="text/javascript" th:src="@{~/vendor/fontawesome/js/fontawesome-all.min.js}" defer></script>
+    <!-- Page plugins -->
+    <script type="text/javascript" th:src="@{~/vendor/bootstrap-select/js/bootstrap-select.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/vendor/bootstrap-tagsinput/bootstrap-tagsinput.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/vendor/input-mask/input-mask.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/vendor/nouislider/js/nouislider.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/vendor/textarea-autosize/textarea-autosize.min.js}"></script>
+    <!-- Theme JS -->
+    <script type="text/javascript" th:src="@{~/js/theme.js}"></script>
+
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+      <div class="container">
+        <a class="navbar-brand" href="/"><strong>Virus</strong> Info Web</a>
+        <button class="navbar-toggler" type="button" data-action="offcanvas-open" data-target="#navbar_main" aria-controls="navbar_main" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse offcanvas-collapse" id="navbar_main">
+          <ul class="navbar-nav ml-auto align-items-lg-center">
+            <h6 class="dropdown-header font-weight-600 d-lg-none px-0">Menu</h6>
+			<li class="nav-item">
+			  <a class="nav-link nav-link-icon" href="/" target="_blank"><i class="fab fa-github"></i><span class="ml-2 d-lg-none">Github</span></a>
+			</li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/">contact us</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbar_main_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">login in</a>
+              <div class="dropdown-menu" aria-labelledby="navbar_1_dropdown_1">
+                <a class="dropdown-item" href="../pages/homepage.html">Homepage</a>
+                <a class="dropdown-item" href="../pages/about.html">About us</a>
+                <a class="dropdown-item" href="../pages/sign-in.html">Sign in</a>
+                <a class="dropdown-item" href="../pages/contact.html">Contact</a>
+              </div>
+            </li>
+           
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="main">
+      <section class="spotlight bg-cover bg-size--cover" style="background-image: url('../assets/images/backgrounds/img-1.jpg')">
+        <span class="mask bg-primary alpha-7"></span>
+        <div class="spotlight-holder py-sm pt-lg-lg">
+          <div class="container d-flex align-items-center">
+            <div class="row cols-xs-space cols-sm-space cols-md-space align-items-center justify-content-around">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-5 bg-lighter border-top border-bottom" id="scrollToSection">
+        <div class="container">
+          <div class="d-flex align-items-center justify-content-center">
+          </div>
+        </div>
+      </section>
+	  
+      <section class="slice slice-lg" data-delimiter="1">
+        <div class="container">
+          <div class="mb-md text-center">
+            <h3 class="heading h3">ASN转换PSSM</h3>
+            <div class="fluid-paragraph text-center mt-4">
+              <p class="lead lh-180">此处文本内容待写.................................................</p>
+            </div>
+          </div>
+		  <div class="row-wrapper">
+			  <div class="form-group" th:each="map : ${resultMap}">
+					<form action="/download" method="post" enctype="multipart/form-data">
+						<table class="table table-hover align-items-center">
+						    <tr>
+						        <th th:text="${map.key} + | --- | + ${map.value}">文件-转换完成</th>
+						        <td>
+									<div class="input-group mb-3">
+                                        <input type="text" th:value="${realPathMap.get(map.getKey())}" name="FileName" hidden>
+									    <button type="submit" class="btn btn-primary"> <i class="fas fa-anchor"></i> 下载</button>
+									</div>
+								</td>
+						    </tr>
+						</table>
+					</form>		
+			  </div>		  
+		  </div>
+        </div>
+      </section>
+    </main>
+
+  </body>
+</html>
