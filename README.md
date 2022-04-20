@@ -32,6 +32,9 @@
 
 [BioWeb03/功能1asn文件上传返回PSSM文件.md at master · LoveADMilk/BioWeb03 (github.com)](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/功能1asn文件上传返回PSSM文件.md)
 
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/1-2.PNG?raw=true)
+
+
 ## 2 登录功能
 使用邮箱注册，并返回验证链接，用户点击链接之后才能实现注册成功，点击链接之前，用户对象信息存入redis中，并设置过期时间
 

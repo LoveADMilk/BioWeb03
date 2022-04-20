@@ -6,6 +6,9 @@
 
 ### 1.1 asn上传部分
 
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/1-1.png?raw=true)
+
+
 **确定唯一地址前缀**
 
 随后每批次上传，生成1个唯一名（用时间拼接）的文件夹，然后在此文件夹下上传本次文件
@@ -37,6 +40,9 @@ https://github.com/LoveADMilk/BioWeb-Flask
 服务器map中存入每一个文件上传后的部分地址，传入前端显示已经上传，然后点击对应文件下载之后，将地址前缀再回传到服务器，并与当前地址拼接然后访问磁盘下载
 
 由于pssm文件与asn文件只有后缀不同，所以只需要更改后缀之后进行下载即可。
+
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/1-2.PNG?raw=true)
+
 
 方案2： 使用RabbitMQ 与webSocket即可完成双工通信通知下载
 
