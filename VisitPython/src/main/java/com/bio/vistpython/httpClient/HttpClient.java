@@ -1,9 +1,11 @@
 package com.bio.vistpython.httpClient;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -16,4 +18,5 @@ public class HttpClient {
                 String.class);
         return responseEntity.getBody();
     }
+
 }

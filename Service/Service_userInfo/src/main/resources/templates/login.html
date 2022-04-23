@@ -5,10 +5,26 @@
     <title>登录</title>
 </head>
 <body>
+<!--<th:block>-->
+<!--    -->
+<!--</th:block>-->
 <form action="/userLogin" method="post">
     邮箱：<input type="email" id="email" name="email"><br>
     密码：<input type="password" id="password" name="password"/><br>
     <input type="submit" value="登录">
 </form>
+<span th:text="${userId}"></span>
+<span th:text="${userName}"></span>
+<span th:text="${userEmail}"></span>
+
+
 </body>
+<script type="text/javascript">
+    $.ajax({
+        url: a_cross_domain_url,
+        xhrFields: {
+            withCredentials: true
+        }
+    });
+</script>
 </html>

@@ -24,6 +24,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
+
 <!--        webSocket-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

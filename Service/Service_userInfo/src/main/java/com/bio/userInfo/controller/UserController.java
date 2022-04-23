@@ -1,5 +1,6 @@
 package com.bio.userInfo.controller;
 
+import com.bio.common.helper.JwtHelper;
 import com.bio.common.util.IDUtils;
 import com.bio.entityModel.model.user.userInfo;
 import com.bio.userInfo.service.MailService;
@@ -8,9 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.annotation.Resource;
+import javax.mail.Session;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -91,14 +98,34 @@ public class UserController {
      * **/
     //点击登录按钮之后
     @RequestMapping("/userLogin")
-    public String userLogin(String email, String password){
+    public String userLogin(Model model, String email, String password, HttpServletResponse response){
         //返回用户对象根据邮箱
         userInfo user = userService.selectUserByEmail(email);
+        String token = "";
         if(user == null || !user.getPassword().equals(password)){
             log.info("用户密码或邮箱错误请重新登录");
+        }else{
+            log.info(user.getEmail() + "该用户登陆成功");
+//            获得token
+            token = JwtHelper.createToken(user.getId(),user.getNickName(),user.getEmail());
+            //登录成功返回到login
+            Cookie cookie = new Cookie("token", token);
+            response.addCookie(cookie);
+            //登录之后保持登陆状态，将用户信息转回到前端
+            model.addAttribute("userId", JwtHelper.getUserId(token));
+            model.addAttribute("userName", JwtHelper.getUserName(token));
+            model.addAttribute("userEmail", JwtHelper.getUserEmail(token));
         }
-        log.info(user.getEmail() + "该用户登陆成功");
-        //登录成功返回到login
+
         return "login";
     }
+
+    //登出
+    @RequestMapping("/logout")
+    public String logout(HttpSession session, SessionStatus sessionStatus){
+        session.invalidate();
+        sessionStatus.setComplete();
+        return "login";
+    }
+
 }
