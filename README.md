@@ -16,6 +16,8 @@ Virus生信平台
 
 目的：无登录状态下完成上传asn文件与下载PSSM文件
 
+特殊功能0-ASN文件提取PSSM矩阵
+
 ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/asn%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E4%B8%BAPSSM.PNG?raw=true)
 
 具体设计：
@@ -38,8 +40,9 @@ Virus生信平台
 
 ## 3 流感数据信息
 
-主要功能：增删改查、分页显示、特殊功能高亮对比序列
+主要功能：增删改查、分页显示
 
+特殊功能1-序列内容对比（同类型）-->获得变异点
 
 具体设计：
 
@@ -48,12 +51,13 @@ Virus生信平台
 
 ## 4 流感相关论文模块
 
+可以显示前沿论文的相关信息
+
+特殊功能2-定时任务之论文爬取
+
 具体设计：
 
 [BioWeb03/功能4-流感相关论文模块.md at master · LoveADMilk/BioWeb03 (github.com)](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/功能4-流感相关论文模块.md)
-
-可以显示前沿论文的相关信息
-
 
 
 ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/4-1.PNG?raw=true)
@@ -68,6 +72,8 @@ Virus生信平台
 ## 5 深度学习模型部署
 
 部署深度学习模型，提供预测结果与状态回传
+
+特殊功能3-WebSocket + RabbitMQ 实现异步训练状态回传的功能
 
 ### 5-1 WebSocket + RabbitMQ 实现异步训练状态回传的功能
 
