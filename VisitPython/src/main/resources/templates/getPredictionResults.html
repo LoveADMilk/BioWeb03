@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Probably the most complete UI kit out there. Multiple functionalities and controls added,  extended color palette and beautiful typography, designed as its own extended version of Bootstrap at  the highest level of quality.                             ">
+    <meta name="author" content="Webpixels">
+    <title>Bio Web</title>
+    <!-- Fonts -->
+    <!--   FontAwesome 在Thymeleaf生效需要导入这三个链接 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+    <!-- Theme CSS -->
+    <link type="text/css" rel="stylesheet"  th:href="@{/css/theme.css}">
+    <!-- Demo CSS - No need to use these in your project -->
+    <link type="text/css"  rel="stylesheet" th:href="@{/css/demo.css}">
+    <!-- Core -->
+    <script type="text/javascript" th:src="@{~/vendor/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/vendor/popper/popper.min.js}" ></script>
+    <script type="text/javascript" th:src="@{~/js/bootstrap/bootstrap.min.js}"></script>
+    <!-- FontAwesome 5 -->
+    <script type="text/javascript" th:src="@{~/vendor/fontawesome/js/fontawesome-all.min.js}" defer></script>
+    <!-- Page plugins -->
+    <script type="text/javascript" th:src="@{~/vendor/bootstrap-select/js/bootstrap-select.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/vendor/bootstrap-tagsinput/bootstrap-tagsinput.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/vendor/input-mask/input-mask.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/vendor/nouislider/js/nouislider.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/vendor/textarea-autosize/textarea-autosize.min.js}"></script>
+    <!-- Theme JS -->
+    <script type="text/javascript" th:src="@{~/js/theme.js}"></script>
+
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+      <div class="container">
+        <a class="navbar-brand" href="/"><strong>Virus</strong> Info Web</a>
+        <button class="navbar-toggler" type="button" data-action="offcanvas-open" data-target="#navbar_main" aria-controls="navbar_main" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse offcanvas-collapse" id="navbar_main">
+          <ul class="navbar-nav ml-auto align-items-lg-center">
+            <h6 class="dropdown-header font-weight-600 d-lg-none px-0">Menu</h6>
+			<li class="nav-item">
+			  <a class="nav-link nav-link-icon" href="/" target="_blank"><i class="fab fa-github"></i><span class="ml-2 d-lg-none">Github</span></a>
+			</li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/">contact us</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbar_main_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">login in</a>
+              <div class="dropdown-menu" aria-labelledby="navbar_1_dropdown_1">
+                <a class="dropdown-item" href="../pages/homepage.html">Homepage</a>
+                <a class="dropdown-item" href="../pages/about.html">About us</a>
+                <a class="dropdown-item" href="../pages/sign-in.html">Sign in</a>
+                <a class="dropdown-item" href="../pages/contact.html">Contact</a>
+              </div>
+            </li>
+           
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="main">
+      <section class="spotlight bg-cover bg-size--cover" style="background-image: url('../assets/images/backgrounds/img-1.jpg')">
+        <span class="mask bg-primary alpha-7"></span>
+        <div class="spotlight-holder py-sm pt-lg-lg">
+          <div class="container d-flex align-items-center">
+            <div class="row cols-xs-space cols-sm-space cols-md-space align-items-center justify-content-around">
+            
+			</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-5 bg-lighter border-top border-bottom" id="scrollToSection">
+        <div class="container">
+          <div class="d-flex align-items-center justify-content-center">
+          </div>
+        </div>
+      </section>
+	  
+      <section class="slice slice-lg" data-delimiter="1">
+        <div class="container">
+          <div class="mb-md text-center">
+            <h3 class="heading h3">待扩展</h3>
+            <div class="fluid-paragraph text-center mt-4">
+             <p class="lead lh-180">预测结果</p>
+            </div>
+          </div>
+		  <div class="row-wrapper">
+
+<!--              <input id="text" type="text"/>-->
+<!--              <button onclick="send()">发送消息</button>-->
+<!--              <hr/>-->
+
+			<table class="table table-hover table-cards align-items-center">
+			    <thead>
+			        <tr>
+			            <th scope="col"> <button type="button" class="btn btn-sm btn-primary px-5"><i class="fas fa-circle-notch fa-spin"></i> 预测中</button></th>
+			        </tr>
+			    </thead>
+			    <tbody id="message">
+
+			    </tbody>
+			</table>
+		  </div>
+        </div>
+		
+      </section>
+
+    </main>
+
+  </body>
+<script type="text/javascript">
+    var websocket = null;
+    var userId = [[${userId}]];
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        websocket = new WebSocket('ws://localhost:8123/websocket/'+ userId);
+        console.log('ws://localhost:8123/websocket/'+ userId);
+    }
+    else {
+        alert('当前浏览器 Not support websocket')
+    }
+
+    //连接发生错误的回调方法
+    websocket.onerror = function () {
+        setMessageInnerHTML("WebSocket连接发生错误");
+    };
+
+    //连接成功建立的回调方法
+    websocket.onopen = function () {
+        // setMessageInnerHTML("WebSocket连接成功");
+        setMessageInnerHTML("开始预测--正在预测中...");
+    }
+
+    //接收到消息的回调方法 收到后端OnMessage
+    websocket.onmessage = function (event) {
+        setMessageInnerHTML(event.data);
+    }
+
+    //连接关闭的回调方法
+    websocket.onclose = function () {
+        // setMessageInnerHTML("WebSocket连接关闭");
+        setMessageInnerHTML("预测通道关闭");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function () {
+        closeWebSocket();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        document.getElementById('message').innerHTML += '<tr class="bg-white" > <td>' + innerHTML + '</td></tr>' + '<tr class="table-divider"></tr>';
+    }
+
+    //关闭WebSocket连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+
+    //发送消息,出发后端的OnMessage
+    // function send() {
+    //     var message = document.getElementById('text').value;
+    //     websocket.send(message);
+    // }
+
+    //心跳
+    // function autoSend(){
+    //     setInterval(function(){
+    //         //里面写内容
+    //         var info = "你好";
+    //         websocket.send(info);
+    //     },200);
+    // }
+    // autoSend();
+
+
+</script>
+</html>

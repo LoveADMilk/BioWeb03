@@ -1,16 +1,10 @@
 package com.bio.vistpython.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.bio.vistpython.httpClient.HttpClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -47,8 +41,14 @@ public class WebSockTest {
         //阶段2 ： 上传成功，正在编码
         //阶段3 ： 编码成功，正在进行预测
         //阶段4 ： 预测结果为
-
-        onMessage(status, id);//指定编号
+        if(status.equals("over")){
+            status = "预测通道关闭";
+        }
+        onMessage(status, id);//指定编号,传入到对应的客户端
+//        over说明预测结果已经传递进去，需要关闭链接
+        if(status.equals("over")){
+            onClose(id);
+        }
 //        log.info("传递进来的消息是：" + messageBody);
 
     }
