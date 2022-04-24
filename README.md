@@ -4,15 +4,14 @@
 
 ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/index.PNG?raw=true)
 
-新增特殊功能3-WebSocket + RabbitMQ 实现异步训练状态回传的功能
+2022/04/24-新增特殊功能3-WebSocket + RabbitMQ 实现异步训练状态回传的功能
 
-
-
-新增特殊功能2-定时任务之论文爬取
-
-
+2022/04/20-新增特殊功能2-定时任务之论文爬取
 
 新增特殊功能1-序列内容对比（同类型）-->获得变异点
+
+新增特殊功能0-ASN文件提取PSSM矩阵
+
 
 ## 1 asn文件上传返回PSSM文件
 
