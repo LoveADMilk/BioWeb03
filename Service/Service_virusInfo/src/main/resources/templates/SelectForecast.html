@@ -105,13 +105,10 @@
 								</li>
 							</ul>
 			                <p class="mt-4" th:text="${virusModel.info}"></p>
-			                <button  class="btn btn-primary btn-animated btn-animated-x mt-4">
+			                <button th:action="@{http://localhost:8123/getResults/${virusModel.id}}" type="button" class="btn btn-primary btn-animated btn-animated-x mt-4">
 			                	<span class="btn-inner--visible">点击预测</span>
 <!--								其实这里可以在让用户跳转到选择编码方式处-->
-                                <p th:text="${virusModel.id}"></p>
-                                <a th:href="@{'/getResults/'+${virusModel.id}}">
-                                    <span class="btn-inner--hidden"><i class="fas fa-arrow-right"></i></span>
-                                </a>
+								<span class="btn-inner--hidden"><i class="fas fa-arrow-right"></i></span>
 			                </button>
 			            </div>
 			        </div>

@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.util.concurrent.FailureCallback;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.SuccessCallback;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.AsyncRestTemplate;
 
 import javax.servlet.http.Cookie;
@@ -24,8 +26,11 @@ public class GetResults {
     private AsyncRestTemplate asyncRestTemplate;
 
     // 点击这里实现预测功能。。。
-    @RequestMapping("/getResults")
-    public String greet(Model model, HttpServletRequest request){
+    @RequestMapping("/getResults/{modelId}")
+    public String greet(Model model, HttpServletRequest request,
+                        @PathVariable(value = "modelId") Integer modelId
+                        ){
+        System.out.println("modelId" + modelId);
         Cookie[] cookies =  request.getCookies();
         String token = "";
         if(cookies != null){
@@ -48,7 +53,7 @@ public class GetResults {
         //将用户的ID通过Rest方式传递到Flask接口，然后回传消息的时候将user ID带回来
         //这里一定要异步调用的方式，否则会一直阻塞到所有消息都的到才能跳转到页面
 //        异步调用就可以不用等，FLask端口完成所有操作后，再跳转。
-        String url = "http://127.0.0.1:5000/getPredictStatus/" + JwtHelper.getUserId(token)+"/";//异步方式访问端口，进行训练，并通过
+        String url = "http://127.0.0.1:5000/getPredictStatus/" + JwtHelper.getUserId(token)+"/" +modelId + "/";//异步方式访问端口，进行训练，并通过
 
         ListenableFuture<ResponseEntity<String>> entity = asyncRestTemplate.getForEntity(url, String.class);
         entity.addCallback(new SuccessCallback<ResponseEntity<String>>() {
@@ -65,5 +70,7 @@ public class GetResults {
         log.info("C");
 
         return "getPredictionResults";
+//        return "";
     }
+
 }

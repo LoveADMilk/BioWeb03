@@ -16,7 +16,7 @@ Virus生信平台
 
 目的：无登录状态下完成上传asn文件与下载PSSM文件
 
-特殊功能0-ASN文件提取PSSM矩阵
+**特殊功能0-ASN文件提取PSSM矩阵**
 
 ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/asn%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E4%B8%BAPSSM.PNG?raw=true)
 
@@ -42,7 +42,7 @@ Virus生信平台
 
 主要功能：增删改查、分页显示
 
-特殊功能1-序列内容对比（同类型）-->获得变异点
+**特殊功能1-序列内容对比（同类型）-->获得变异点**
 
 具体设计：
 
@@ -53,7 +53,7 @@ Virus生信平台
 
 可以显示前沿论文的相关信息
 
-特殊功能2-定时任务之论文爬取
+**特殊功能2-定时任务之论文爬取**
 
 具体设计：
 
@@ -73,7 +73,7 @@ Virus生信平台
 
 部署深度学习模型，提供预测结果与状态回传
 
-特殊功能3-WebSocket + RabbitMQ 实现异步训练状态回传的功能
+**特殊功能3-WebSocket + RabbitMQ 实现异步训练状态回传的功能**
 
 ### 5-1 WebSocket + RabbitMQ 实现异步训练状态回传的功能
 
@@ -108,3 +108,26 @@ Virus生信平台
 
 
 其次是否需要心跳机制保持链接呢？
+
+## 5-2 选择预测模型
+
+用户可以选择已经上线的模型，通过远程调用将用户ID与模型ID传入到Flask
+
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/5-2.PNG?raw=true)
+
+
+表设计：
+
+```sql
+CREATE TABLE `model` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `name` VARCHAR(1000) DEFAULT NULL COMMENT '模型名称',
+  `info` VARCHAR(100) DEFAULT NULL COMMENT '模型简介',
+  `modellike` INT(100) DEFAULT NULL COMMENT '点赞数',
+  `modelviews` BIGINT(20) DEFAULT NULL COMMENT '访问量',
+
+  `createTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updateTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='模型表';
+```

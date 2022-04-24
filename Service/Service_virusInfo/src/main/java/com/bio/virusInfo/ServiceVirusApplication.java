@@ -9,5 +9,4 @@ public class ServiceVirusApplication {
     public static void main(String[] args) {
         SpringApplication.run(ServiceVirusApplication.class, args);
     }
-
 }
