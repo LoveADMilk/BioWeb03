@@ -1,8 +1,6 @@
 # BioWeb
 
-生信平台
-
-![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/index.PNG?raw=true)
+Virus生信平台
 
 2022/04/24-新增特殊功能3-WebSocket + RabbitMQ 实现异步训练状态回传的功能
 
@@ -12,6 +10,7 @@
 
 新增特殊功能0-ASN文件提取PSSM矩阵
 
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/index.PNG?raw=true)
 
 ## 1 asn文件上传返回PSSM文件
 
