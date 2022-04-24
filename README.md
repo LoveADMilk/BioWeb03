@@ -41,11 +41,6 @@
 ## 3 流感数据信息
 
 主要功能：增删改查、分页显示、特殊功能高亮对比序列
-- **新增特殊功能1-序列内容对比（同类型）-->获得变异点**
-
-  前端使用JS+Thymeleaf进行高亮显示变异点：
-
-![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-4.PNG?raw=true)
 
 
 具体设计：
@@ -63,20 +58,13 @@
 
 
 
-- **新增特殊功能2-定时任务之论文爬取**
-
-  通过爬虫爬取Google scholar 使得获得**最前沿**相关文献，并存入数据库
-  ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/4-1.PNG?raw=true)
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/4-1.PNG?raw=true)
 
   爬虫具体设计与代码：
 
   [BioWeb-Flask/ExtractPaper.py at master · LoveADMilk/BioWeb-Flask (github.com)](https://github.com/LoveADMilk/BioWeb-Flask/blob/master/ExtractPaper.py)
 
 简介-`@Scheduled`做循环定时任务，访问Flask端口，利用python的beauty soup做爬虫，然后存入数据库
-
-
-
-
 
 
 ## 5 深度学习模型部署
