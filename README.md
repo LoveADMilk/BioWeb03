@@ -2,15 +2,23 @@
 
 生信平台
 
-# ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/index.PNG?raw=true)
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/index.PNG?raw=true)
+
+新增特殊功能3-WebSocket + RabbitMQ 实现异步训练状态回传的功能
 
 
+
+新增特殊功能2-定时任务之论文爬取
+
+
+
+新增特殊功能1-序列内容对比（同类型）-->获得变异点
 
 ## 1 asn文件上传返回PSSM文件
 
 目的：无登录状态下完成上传asn文件与下载PSSM文件
 
-###### ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/asn%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E4%B8%BAPSSM.PNG?raw=true)
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/asn%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E4%B8%BAPSSM.PNG?raw=true)
 
 具体设计：
 
@@ -21,6 +29,8 @@
 
 ## 2 登录功能
 使用邮箱注册，并返回验证链接，用户点击链接之后才能实现注册成功，点击链接之前，用户对象信息存入redis中，并设置过期时间
+
+通过在cookie中加入token,使用JWT方案解决保持登录状态
 
 具体设计
 
@@ -35,7 +45,7 @@
 
   前端使用JS+Thymeleaf进行高亮显示变异点：
 
-  # ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-4.PNG?raw=true)
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/3-4.PNG?raw=true)
 
 
 具体设计：
@@ -51,9 +61,7 @@
 
 可以显示前沿论文的相关信息
 
-访问路径：`http://localhost:8151/allPaperPage?pn=1&time=2022&order=reverse`
 
-服务端用@RequestParam接受
 
 - **新增特殊功能2-定时任务之论文爬取**
 
@@ -68,18 +76,7 @@
 
 
 
-定时任务爬虫爬取论文数据 -> 存入MySQL中
 
-可以根据时间查询对象年份的论文，并根据引用数递增递减显示
-
-因此主要处理四种情况：
-
-- time & order全为空的情况，就是默认paper表的全部内容
-- order不为空 time不空,那就是按照年份条件得到结果，并order by引用数，判断其order内容选择正反序列 positive->ASC递增 reverse->desc递减
-- order为空 time不空，那就是按照年份条件得到结果
-- order不为空 time空，那就是默认排序下，order by引用数，判断其order内容选择正反序列 positive->ASC递增 reverse->desc递减
-
-分别进行查询操作并返回到前端
 
 
 ## 5 深度学习模型部署
