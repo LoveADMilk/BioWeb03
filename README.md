@@ -111,9 +111,16 @@ Virus生信平台
 
 ## 5-2 选择预测模型
 
-用户可以选择已经上线的模型，通过远程调用将用户ID与模型ID传入到Flask
+
+用户可以选择已经上线的模型，
+
+**然后跳转选择编码方式页面，并输入序列，序列存入Redis中，将编码的ID与模型ID用户ID传入到Flask**
+
+编码ID用户ID模型ID组成唯一的 Redis key ,将两条序列信息存入到value中！
 
 ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/5-2.PNG?raw=true)
+
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/5-3.PNG?raw=true)
 
 
 表设计：
