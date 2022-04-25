@@ -89,11 +89,6 @@
             </div>
           </div>
 		  <div class="row-wrapper">
-
-<!--              <input id="text" type="text"/>-->
-<!--              <button onclick="send()">发送消息</button>-->
-<!--              <hr/>-->
-
 			<table class="table table-hover table-cards align-items-center">
 			    <thead>
 			        <tr>
@@ -132,11 +127,13 @@
     //连接成功建立的回调方法
     websocket.onopen = function () {
         // setMessageInnerHTML("WebSocket连接成功");
+        heartCheck.reset().start();      //心跳检测重置
         setMessageInnerHTML("开始预测--正在预测中...");
     }
 
     //接收到消息的回调方法 收到后端OnMessage
     websocket.onmessage = function (event) {
+        heartCheck.reset().start();      //拿到任何消息都说明当前连接是正常的
         setMessageInnerHTML(event.data);
     }
 
@@ -167,16 +164,30 @@
     //     websocket.send(message);
     // }
 
-    //心跳
-    // function autoSend(){
-    //     setInterval(function(){
-    //         //里面写内容
-    //         var info = "你好";
-    //         websocket.send(info);
-    //     },200);
-    // }
-    // autoSend();
-
+    //心跳检测 由于是 只需要使用 是否保持连接，所以没必要做心跳，WebSocket自动ping
+    // var heartCheck = {
+    //     timeout: 540000,        //9分钟发一次心跳
+    //     timeoutObj: null,
+    //     serverTimeoutObj: null,
+    //     //心跳重置
+    //     reset: function(){
+    //         clearTimeout(this.timeoutObj);
+    //         clearTimeout(this.serverTimeoutObj);
+    //         return this;
+    //     },
+    //     // 心跳开始
+    //     start: function(){
+    //         var self = this;
+    //         this.timeoutObj = setTimeout(function(){
+    //             //这里发送一个心跳，后端收到后，返回一个心跳消息，
+    //             //onmessage拿到返回的心跳就说明连接正常
+    //             ws.send("ping");
+    //             console.log("ping!")
+    //             self.serverTimeoutObj = setTimeout(function(){//如果超过一定时间还没重置，说明后端主动断开了
+    //                 ws.close();     //如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+    //             }, self.timeout)
+    //         }, this.timeout)
+    //     }
 
 </script>
 </html>
