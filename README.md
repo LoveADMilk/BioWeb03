@@ -73,6 +73,11 @@ Virus生信平台
 
 部署深度学习模型，提供预测结果与状态回传
 
+详细设计图：
+
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/5design.PNG?raw=true)
+
+
 **特殊功能3-WebSocket + RabbitMQ 实现异步训练状态回传的功能**
 
 ### 5-1 WebSocket + RabbitMQ 实现异步训练状态回传的功能
@@ -103,7 +108,6 @@ Virus生信平台
 ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/5-1.PNG?raw=true)
 
 
-详细设计图：
 
 
 
