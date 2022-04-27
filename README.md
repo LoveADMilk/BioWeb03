@@ -160,3 +160,9 @@ CREATE TABLE `model` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='模型表';
 ```
+
+## 数据可视化分析
+
+选择2个JS数据分析框架
+1.普通
+2.具有地理map的框架
