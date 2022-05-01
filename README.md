@@ -170,7 +170,7 @@ CREATE TABLE `model` (
 
 ## 微服务相关
 
-开启Nacos
+开启Nacos与gateWay，使用其路由与断言功能
 
 ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/Nacos.PNG?raw=true)
 
