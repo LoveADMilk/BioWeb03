@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ServiceGateWay" />
         <module name="Service_userInfo" />
         <module name="model" />
         <module name="common" />
@@ -22,6 +23,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="BioWeb03" options="-parameters" />
       <module name="Service" options="-parameters" />
+      <module name="ServiceGateWay" options="-parameters" />
       <module name="Service_user" options="-parameters" />
       <module name="Service_userInfo" options="-parameters" />
       <module name="Service_virusInfo" options="-parameters" />

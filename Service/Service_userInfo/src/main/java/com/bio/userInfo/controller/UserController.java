@@ -34,7 +34,7 @@ public class UserController {
     private RedisTemplate<String , Object> redisTemplate;
 
     //临时的index控制器
-    @GetMapping ("/")
+    @GetMapping ("/user")
     public String index(){
         return "index";
     }
@@ -42,7 +42,7 @@ public class UserController {
     /**
      * 用户注册
      * **/
-    @RequestMapping("/register")
+    @RequestMapping("/user/register")
     public String register(userInfo user){
         user.setActiveStatus(0);//状态
         String activeCode = IDUtils.getUUID();//生成随机激活码
@@ -64,7 +64,7 @@ public class UserController {
         return "success";//返回成功界面
     }
 
-    @RequestMapping("/checkCode")
+    @RequestMapping("/user/checkCode")
     public String checkCode(@RequestParam(value = "code", required = true) String code){
         log.info("传递进的激活码： " + code);
         if(code.equals("")) {
@@ -88,7 +88,7 @@ public class UserController {
     }
 
     //直接访问到登录界面
-    @RequestMapping("/login")
+    @RequestMapping("/user/login")
     public String login(){
         return "login";
     }
@@ -97,7 +97,7 @@ public class UserController {
      * @param  email, password 传入的登录用户的邮箱与密码
      * **/
     //点击登录按钮之后
-    @RequestMapping("/userLogin")
+    @RequestMapping("/user/userLogin")
     public String userLogin(Model model, String email, String password, HttpServletResponse response){
         //返回用户对象根据邮箱
         userInfo user = userService.selectUserByEmail(email);
@@ -121,7 +121,7 @@ public class UserController {
     }
 
     //登出
-    @RequestMapping("/logout")
+    @RequestMapping("/user/logout")
     public String logout(HttpSession session, SessionStatus sessionStatus){
         session.invalidate();
         sessionStatus.setComplete();
