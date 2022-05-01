@@ -166,3 +166,11 @@ CREATE TABLE `model` (
 选择2个JS数据分析框架
 1.普通
 2.具有地理map的框架
+
+
+## 微服务相关
+
+开启Nacos
+
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/Nacos.PNG?raw=true)
+
