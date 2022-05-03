@@ -59,7 +59,7 @@ public class visitController {
         String token = "";
         if(cookies != null){
             for(Cookie cookie : cookies){
-                if(cookie.getName().equals("token")){
+                if(cookie.getName().equals("Biotoken")){
                     token = cookie.getValue();
                     break;
                 }
@@ -77,21 +77,21 @@ public class visitController {
         //将用户的ID通过Rest方式传递到Flask接口，然后回传消息的时候将user ID带回来
         //这里一定要异步调用的方式，否则会一直阻塞到所有消息都的到才能跳转到页面
         //异步调用就可以不用等，FLask端口完成所有操作后，再跳转。
-        String url = "http://127.0.0.1:5000/getPredictStatus/" + JwtHelper.getUserId(token)+"/";//异步方式访问端口，进行训练，并通过
-
-        ListenableFuture<ResponseEntity<String>> entity = asyncRestTemplate.getForEntity(url, String.class);
-        entity.addCallback(new SuccessCallback<ResponseEntity<String>>() {
-            @Override
-            public void onSuccess(ResponseEntity<String> result) {
-                log.info("A");
-            }
-        }, new FailureCallback() {
-            @Override
-            public void onFailure(Throwable ex) {
-                log.info("B");
-            }
-        });
-        log.info("C");
+//        String url = "http://127.0.0.1:5000/getPredictStatus/" + JwtHelper.getUserId(token)+"/";//异步方式访问端口，进行训练，并通过
+//
+//        ListenableFuture<ResponseEntity<String>> entity = asyncRestTemplate.getForEntity(url, String.class);
+//        entity.addCallback(new SuccessCallback<ResponseEntity<String>>() {
+//            @Override
+//            public void onSuccess(ResponseEntity<String> result) {
+//                log.info("A");
+//            }
+//        }, new FailureCallback() {
+//            @Override
+//            public void onFailure(Throwable ex) {
+//                log.info("B");
+//            }
+//        });
+//        log.info("C");
 
        return "greeting";
     }

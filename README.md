@@ -36,7 +36,7 @@ Virus生信平台
 
 [BioWeb03/功能2-登录功能.md at master · LoveADMilk/BioWeb03 (github.com)](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/功能2-登录功能.md)
 
-
+2022/5/3-完善JWTHelper,针对JWT过期一场进行捕捉处理
 
 ## 3 流感数据信息
 

@@ -39,6 +39,10 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping ("/sign-inHtml")
+    public String signinHtml(){
+        return "sign-in";
+    }
     /**
      * 用户注册
      * **/
@@ -97,7 +101,7 @@ public class UserController {
      * @param  email, password 传入的登录用户的邮箱与密码
      * **/
     //点击登录按钮之后
-    @RequestMapping("/user/userLogin")
+    @RequestMapping("/userLogin")
     public String userLogin(Model model, String email, String password, HttpServletResponse response){
         //返回用户对象根据邮箱
         userInfo user = userService.selectUserByEmail(email);
@@ -109,7 +113,8 @@ public class UserController {
 //            获得token
             token = JwtHelper.createToken(user.getId(),user.getNickName(),user.getEmail());
             //登录成功返回到login
-            Cookie cookie = new Cookie("token", token);
+            Cookie cookie = new Cookie("Biotoken", token);
+//            cookie.setDomain("localhost");
             response.addCookie(cookie);
             //登录之后保持登陆状态，将用户信息转回到前端
             model.addAttribute("userId", JwtHelper.getUserId(token));

@@ -51,7 +51,7 @@ public class GetResults {
         String token = "";
         if(cookies != null){
             for(Cookie cookie : cookies){
-                if(cookie.getName().equals("token")){
+                if(cookie.getName().equals("Biotoken")){
                     token = cookie.getValue();
                     break;
                 }

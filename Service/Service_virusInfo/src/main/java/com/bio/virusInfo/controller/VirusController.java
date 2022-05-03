@@ -2,6 +2,8 @@ package com.bio.virusInfo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bio.common.helper.JwtHelper;
+import com.bio.common.util.GetUserVo;
 import com.bio.entityModel.model.virusInfo.Virus;
 import com.bio.entityModel.model.virusInfo.VirusHI;
 import com.bio.virusInfo.mapper.VirusHIMapper;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -37,22 +41,51 @@ public class VirusController {
      * 此部分内容用于跳转到相关页面
      * **/
     @RequestMapping("/")
-    public String index(){
+    public String index(Model model,
+                        HttpServletRequest request){
+        Map<String, Object> map = GetUserVo.getUserInfo(request);
+        if(map.get("Biotoken").equals("") || map.get("userName") == null || map.get("userName").equals("")){
+            System.out.println("提醒用户进行登录");
+        }
+        System.out.println("email: " + map.get("userEmail"));
+        model.addAttribute("userName", map.get("userName"));
+        model.addAttribute("userId", map.get("userId"));
+        model.addAttribute("userEmail", map.get("userEmail"));
         return "myIndex";
     }
 
     @RequestMapping("/uploadVirusHtml")//进入上传病毒信息页面
-    public String uploadVirusHtml(){
+    public String uploadVirusHtml(Model model,
+                                  HttpServletRequest request){
+        Map<String, Object> map = GetUserVo.getUserInfo(request);
+        if(map.get("Biotoken").equals("") || map.get("userName") == null || map.get("userName").equals("")){
+            System.out.println("提醒用户进行登录");
+        }
+        System.out.println("email: " + map.get("userEmail"));
+        model.addAttribute("userName", map.get("userName"));
+        model.addAttribute("userId", map.get("userId"));
+        model.addAttribute("userEmail", map.get("userEmail"));
         return "uploadVirus";
     }
     @RequestMapping("/analyseVirusSequenceHtml")//进入病毒序列比对页面
     public String analyseVirusSequenceHtml(){
         return "analyseVirusSequence";
     }
+
     @RequestMapping("/uploadVirusHIHtml")//进入病毒序列比对页面
-    public String uploadVirusHIHtml(){
+    public String uploadVirusHIHtml(Model model,
+                                    HttpServletRequest request){
+        Map<String, Object> map = GetUserVo.getUserInfo(request);
+        if(map.get("Biotoken").equals("") || map.get("userName") == null || map.get("userName").equals("")){
+            System.out.println("提醒用户进行登录");
+        }
+        System.out.println("email: " + map.get("userEmail"));
+        model.addAttribute("userName", map.get("userName"));
+        model.addAttribute("userId", map.get("userId"));
+        model.addAttribute("userEmail", map.get("userEmail"));
         return "uploadVirusHI";
     }
+
     @RequestMapping("/virusHIInfoSelectHtml")//进入选择以什么方式获得hi数据，by type, 还是 by name
     public String virusHIInfoSelectHtml(){
         return "virusHIInfoSelect";
@@ -85,12 +118,20 @@ public class VirusController {
      * 上传Virus
      * **/
     @RequestMapping("/virusUpload")
-    public String virusUpload(Virus virus){
-        virus.setUserId(1);//后续扩展JWT验证
+    public String virusUpload(Model model, Virus virus,HttpServletRequest request){
+        Map<String, Object> map = GetUserVo.getUserInfo(request);
+        if(map.get("Biotoken").equals("") || map.get("userName") == null || map.get("userName").equals("")){
+            System.out.println("提醒用户进行登录");
+        }
+        Number num = (Number) map.get("userId");
+        virus.setUserId(num.intValue());
         virus.setLongitude(new BigDecimal("1.1"));//经度，后续查城市的经纬度表进行查询
         virus.setLatitude(new BigDecimal("1.1"));//纬度，后续查城市的经纬度表进行查询
         System.out.println(virus);
         virusService.insertVirus(virus);
+        model.addAttribute("userName", map.get("userName"));
+        model.addAttribute("userId", map.get("userId"));
+        model.addAttribute("userEmail", map.get("userEmail"));
         return "uploadVirus";
     }
 
@@ -131,12 +172,22 @@ public class VirusController {
      *
      * ***/
     @RequestMapping("/virusHIUpload")
-    public String virusHIUpload(VirusHI virusHI){
-        virusHI.setUserId(1);
+    public String virusHIUpload(VirusHI virusHI,
+                                Model model,
+                                HttpServletRequest request){
+        Map<String, Object> map = GetUserVo.getUserInfo(request);
+        if(map.get("Biotoken").equals("") || map.get("userName") == null || map.get("userName").equals("")){
+            System.out.println("提醒用户进行登录");
+        }
+        Number num = (Number) map.get("userId");
+        virusHI.setUserId(num.intValue());
         Double distance = virusHIService.computeDistance(virusHI.getAbHI(), virusHI.getBaHI(),
                 virusHI.getAaHI(), virusHI.getBbHI());
         virusHI.setDistance(distance);
         virusHIService.insertVirusHI(virusHI);
+        model.addAttribute("userName", map.get("userName"));
+        model.addAttribute("userId", map.get("userId"));
+        model.addAttribute("userEmail", map.get("userEmail"));
         return "uploadVirusHI";
     }
 

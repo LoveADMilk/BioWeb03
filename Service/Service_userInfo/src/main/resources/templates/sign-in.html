@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Probably the most complete UI kit out there. Multiple functionalities and controls added,  extended color palette and beautiful typography, designed as its own extended version of Bootstrap at  the highest level of quality.                             ">
+  <meta name="author" content="Webpixels">
+  <title>Bio Web</title>
+  <!-- Fonts -->
+  <!--   FontAwesome 在Thymeleaf生效需要导入这三个链接 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+  <!-- Theme CSS -->
+  <link type="text/css" rel="stylesheet"  th:href="@{/css/theme.css}">
+  <!-- Demo CSS - No need to use these in your project -->
+  <link type="text/css"  rel="stylesheet" th:href="@{/css/demo.css}">
+  <!-- Core -->
+  <script type="text/javascript" th:src="@{~/vendor/jquery/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{~/vendor/popper/popper.min.js}" ></script>
+  <script type="text/javascript" th:src="@{~/js/bootstrap/bootstrap.min.js}"></script>
+  <!-- FontAwesome 5 -->
+  <script type="text/javascript" th:src="@{~/vendor/fontawesome/js/fontawesome-all.min.js}" defer></script>
+  <!-- Page plugins -->
+  <script type="text/javascript" th:src="@{~/vendor/bootstrap-select/js/bootstrap-select.min.js}"></script>
+  <script type="text/javascript" th:src="@{~/vendor/bootstrap-tagsinput/bootstrap-tagsinput.min.js}"></script>
+  <script type="text/javascript" th:src="@{~/vendor/input-mask/input-mask.min.js}"></script>
+  <script type="text/javascript" th:src="@{~/vendor/nouislider/js/nouislider.min.js}"></script>
+  <script type="text/javascript" th:src="@{~/vendor/textarea-autosize/textarea-autosize.min.js}"></script>
+  <!-- Theme JS -->
+  <script type="text/javascript" th:src="@{~/js/theme.js}"></script>
+
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+      <div class="container">
+        <a class="navbar-brand" href="../../../../../Service_virusInfo/src/main/resources"><strong>Viurs</strong> Bio Web</a>
+      </div>
+    </nav>
+    <main class="main">
+      <section class="py-xl bg-cover bg-size--cover" style="background-image: url('/images/backgrounds/img-1.jpg')">
+        <span class="mask bg-primary alpha-6"></span>
+        <div class="container d-flex align-items-center no-padding">
+          <div class="col">
+            <div class="row justify-content-center">
+              <div class="col-lg-4">
+                <div class="card bg-primary text-white">
+                  <div class="card-body">
+                    <button type="button" class="btn btn-primary btn-nobg btn-zoom--hover mb-5">
+                      <span class="btn-inner--icon"><i class="fas fa-arrow-left"></i></span>
+                    </button>
+                    <span class="clearfix"></span>
+<!--                    <img src="/images/brand/icon.png" style="width: 50px;">-->
+                    <h4 class="heading h3 text-white pt-3 pb-5">Welcome back,<br>
+                      login to your account.</h4>
+                    <form class="form-primary" action="/userLogin">
+                      <div class="form-group">
+                        <input type="email" name="email" class="form-control" id="input_email" placeholder="Your email">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" name="password" class="form-control" id="input_password" placeholder="Password">
+                      </div>
+					  <div class="text-right mt-4"><a href="#" class="text-white">Register?</a></div>
+                      <div class="text-right mt-4"><a href="#" class="text-white">Forgot password?</a></div>
+                      <button type="submit" class="btn btn-block btn-lg bg-white mt-4">Sign in</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+  </body>
+</html>

@@ -32,35 +32,44 @@
 
 </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
       <div class="container">
-        <a class="navbar-brand" href="/"><strong>Virus</strong> Info Web</a>
-        <button class="navbar-toggler" type="button" data-action="offcanvas-open" data-target="#navbar_main" aria-controls="navbar_main" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse offcanvas-collapse" id="navbar_main">
-          <ul class="navbar-nav ml-auto align-items-lg-center">
-            <h6 class="dropdown-header font-weight-600 d-lg-none px-0">Menu</h6>
-			<li class="nav-item">
-			  <a class="nav-link nav-link-icon" href="/" target="_blank"><i class="fab fa-github"></i><span class="ml-2 d-lg-none">Github</span></a>
-			</li>
-            <li class="nav-item ">
-              <a class="nav-link" href="/">contact us</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbar_main_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">login in</a>
-              <div class="dropdown-menu" aria-labelledby="navbar_1_dropdown_1">
-                <a class="dropdown-item" href="../pages/homepage.html">Homepage</a>
-                <a class="dropdown-item" href="../pages/about.html">About us</a>
-                <a class="dropdown-item" href="../pages/sign-in.html">Sign in</a>
-                <a class="dropdown-item" href="../pages/contact.html">Contact</a>
-              </div>
-            </li>
-            
-          </ul>
-        </div>
+          <a class="navbar-brand" href="/"><strong>Virus</strong> Info Web</a>
+          <button class="navbar-toggler" type="button" data-action="offcanvas-open" data-target="#navbar_main" aria-controls="navbar_main" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse offcanvas-collapse" id="navbar_main">
+              <ul class="navbar-nav ml-auto align-items-lg-center">
+                  <h6 class="dropdown-header font-weight-600 d-lg-none px-0">Menu</h6>
+                  <li class="nav-item">
+                      <a class="nav-link nav-link-icon" href="https://github.com/LoveADMilk/BioWeb03" target="_blank"><i class="fab fa-github"></i><span class="ml-2 d-lg-none">Github</span></a>
+                  </li>
+                  <li class="nav-item ">
+                      <a class="nav-link" href="/">contact us</a>
+                  </li>
+                  <!--            如果有JWT的信息-->
+                  <th:block  th:if="${userEmail !=''}">
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#"
+                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${userEmail}"></a>
+                          <div class="dropdown-menu" aria-labelledby="navbar_1_dropdown_1">
+                              <a class="dropdown-item">log out</a>
+                          </div>
+                      </li>
+                  </th:block>
+                  <th:block  th:if="${userEmail ==''}">
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbar_main_dropdown_1"
+                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">login in</a>
+                          <div class="dropdown-menu" aria-labelledby="navbar_1_dropdown_1">
+                              <a class="dropdown-item" href="http://localhost:8150/sign-inHtml">Sign in</a>
+                          </div>
+                      </li>
+                  </th:block>
+              </ul>
+          </div>
       </div>
-    </nav>
+  </nav>
     <main class="main">
       <section class="spotlight bg-cover bg-size--cover" style="background-image: url('../assets/images/backgrounds/img-1.jpg')">
         <span class="mask bg-primary alpha-7"></span>
@@ -110,7 +119,20 @@
 					  <textarea class="form-control" type="text" name="virusSequence1" rows="20" cols="50" resize="none"></textarea>
 				      <label>病毒B序列：</label>
 				      <textarea class="form-control" type="text" name="virusSequence2" rows="20" cols="50" resize="none"></textarea>
-				      <input class="btn btn-primary" type="submit" value="预测" />
+                      <!-- 以下是提交、取消按钮 -->
+                      <th:block  th:if="${userEmail !=''}">
+                          <input class="btn btn-primary" type="submit" value="预测" />
+                      </th:block>
+                      <th:block  th:if="${userEmail == ''}">
+                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <span class="alert-inner--icon"><i class="fas fa-times"></i></span>
+                              <span class="alert-inner--text"><strong>Danger</strong> 请先登录才能上传</span>
+                              <button type="button" class="undo" aria-label="Undo">Undo</button>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                      </th:block>
 				  </form>
 			  </div>		  
 		  </div>

@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
+<!--    <script type="text/javascript" th:src="@{~/vendor/jquery/jquery.min.js}"></script>-->
 </head>
 <body>
 <!--<th:block>-->
 <!--    -->
 <!--</th:block>-->
-<form action="/user/userLogin" method="post">
+<!--这里只能是一个/，否则出现跨域-->
+<form action="/userLogin" method="post">
     邮箱：<input type="email" id="email" name="email"><br>
     密码：<input type="password" id="password" name="password"/><br>
     <input type="submit" value="登录">
@@ -16,15 +18,7 @@
 <span th:text="${userId}"></span>
 <span th:text="${userName}"></span>
 <span th:text="${userEmail}"></span>
-
+<a href="http://localhost:8151/">回到主页，最好做自动跳转</a>
 
 </body>
-<script type="text/javascript">
-    $.ajax({
-        url: a_cross_domain_url,
-        xhrFields: {
-            withCredentials: true
-        }
-    });
-</script>
 </html>
