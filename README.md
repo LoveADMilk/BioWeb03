@@ -92,9 +92,9 @@ Virus生信平台
 
 ![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/6-1.PNG?raw=true)
 
-举例，H5N1病毒抗原关系图:
+举例，H3N2病毒抗原关系图:
 
-![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/H5N1.png?raw=true)
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/H3N2.png?raw=true)
 
 
 处理数据获得JSON数据代码：
