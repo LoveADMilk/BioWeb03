@@ -90,7 +90,7 @@ Virus生信平台
 
 可以通过点击具体点位获得菌株的具体信息
 
-![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/6-1.png?raw=true)
+![img](https://github.com/LoveADMilk/BioWeb03/blob/master/summary/image/6-1.PNG?raw=true)
 
 举例，H5N1病毒抗原关系图:
 
